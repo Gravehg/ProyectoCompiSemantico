@@ -1,0 +1,439 @@
+struct MyStructint a;
+double b;
+
+}
+_Alignas(16);
+int useAlignas(){
+struct MyStructmyVar;
+printf("Size of myVar: %zu bytes\n", sizeof(myVar));
+printf("Address of myVar.a: %p\n", (void *)&myVar.a);
+printf("Address of myVar.b: %p\n", (void *)&myVar.b);
+return 0;
+
+}
+int useComplex(){
+double real_part=3.0;
+double imaginary_part=4.0;
+double _Complex my_complex=real_part+imaginary_part*imaginary_part;
+double real=creal(my_complex);
+double imag=cimag(my_complex);
+printf("Complex number: %.1f + %.1fi\n", real, imag);
+double _Complex another_complex=1.0+2.0*I;
+double _Complex sum=my_complex+another_complex;
+double _Complex product=my_complex*another_complex;
+printf("Sum: %.1f + %.1fi\n", creal(sum), cimag(sum));
+printf("Product: %.1f + %.1fi\n", creal(product), cimag(product));
+return 0;
+
+}
+int whileGoto(){
+int count=1;
+start:while (count<=10){
+  printf("%d\n", count);
+  count++;
+  
+}
+if (count<=10)goto start;
+return 0;
+
+}
+int BitwiseOps(){
+unsigned int num=12;
+num>>=2;
+printf("After right shift: %u\n", num);
+num<<=1;
+printf("After left shift: %u\n", num);
+return 0;
+
+}
+int AssignOps(){
+int x=10, y=5;
+int result=x;
+printf("Basic assignment: result = %d\n", result);
+x+=5;
+printf("Addition assignment: x += 5, x = %d\n", x);
+x-=3;
+printf("Subtraction assignment: x -= 3, x = %d\n", x);
+x*=2;
+printf("Multiplication assignment: x *= 2, x = %d\n", x);
+x/=4;
+printf("Division assignment: x /= 4, x = %d\n", x);
+x%=5;
+printf("Modulus assignment: x %%= 5, x = %d\n", x);
+x&=3;
+printf("Bitwise AND assignment: x &= 3, x = %d\n", x);
+x|=6;
+printf("Bitwise OR assignment: x |= 6, x = %d\n", x);
+x^=1;
+printf("Bitwise XOR assignment: x ^= 1, x = %d\n", x);
+x<<=2;
+printf("Left shift assignment: x <<= 2, x = %d\n", x);
+x>>=1;
+printf("Right shift assignment: x >>= 1, x = %d\n", x);
+return 0;
+
+}
+int logicalOps(){
+int a=5;
+int b=10;
+if (a>0){
+  printf("Both a and b are greater than 0.\n");
+  
+}
+else {
+  printf("At least one of them is not greater than 0.\n");
+  
+}
+if (a>0){
+  printf("At least one of them is greater than 0.\n");
+  
+}
+else {
+  printf("Both a and b are not greater than 0.\n");
+  
+}
+if (!(a>0)){
+  printf("a is not greater than 0.\n");
+  
+}
+else {
+  printf("a is greater than 0.\n");
+  
+}
+return 0;
+
+}
+int ComparisonOPs(){
+int a=5;
+int b=10;
+if (a==b){
+  printf("a is equal to b.\n");
+  
+}
+else {
+  printf("a is not equal to b.\n");
+  
+}
+if (a!=b){
+  printf("a is not equal to b.\n");
+  
+}
+if (a<b){
+  printf("a is less than b.\n");
+  
+}
+else {
+  printf("a is not less than b.\n");
+  
+}
+if (a>b){
+  printf("a is greater than b.\n");
+  
+}
+else {
+  printf("a is not greater than b.\n");
+  
+}
+if (a<=b){
+  printf("a is less than or equal to b.\n");
+  
+}
+else {
+  printf("a is neither less than nor equal to b.\n");
+  
+}
+if (a>=b){
+  printf("a is greater than or equal to b.\n");
+  
+}
+else {
+  printf("a is neither greater than nor equal to b.\n");
+  
+}
+return 0;
+
+}
+void largeFunction(){
+int sum=0;
+for (int i=1;i<=1000;i++){
+  sum+=i;
+  
+}
+printf("The sum of the numbers from 1 to 1000 is: %d\n", sum);
+for (int i=0;i<5;i++){
+  if (i%2==0){
+      printf("Iteration %d is even.\n", i);
+      
+  }
+  else {
+      printf("Iteration %d is odd.\n", i);
+      
+  }
+  
+}
+
+}
+void print(char *s);
+int goTo(int pos);
+float square(float sq);
+unsigned int uns(unsigned int i);
+int testingKeywords(){
+auto a=10;
+switch (a){
+  case 1:printf("Value is 1\n");
+  break;
+  case 5:printf("Value is 5\n");
+  break;
+  case 10:printf("Value is 10\n");
+  break;
+  default :printf("Value is not 1, 5, or 10\n");
+  break;
+  
+}
+return 0;
+
+}
+int exampleSizes(){
+signed int signedInt=-42;
+unsigned int unsignedInt=42;
+int x=5;
+printf("Size of int: %zu bytes\n", sizeof(int ));
+short shortVar=32767;
+long long longVar=9223372036854775807;
+printf("Signed Integer: %d\n", signedInt);
+printf("Unsigned Integer: %u\n", unsignedInt);
+printf("Short Integer: %hd\n", shortVar);
+printf("Long Integer: %ld\n", longVar);
+return 0;
+
+}
+int charConstDefine(){
+const int constantValue=42;
+char character='A';
+for (int i=1;i<=10;i++){
+  if (i==3){
+      continue ;
+      
+  }
+  switch (i){
+      case 1:printf("Case 1: %d\n", i);
+      break;
+      case 2:printf("Case 2: %d\n", i);
+      break;
+      default :printf("Default Case: %d\n", i);
+      break;
+      
+  }
+  
+}
+printf("The constant value is: %d\n", constantValue);
+printf("The character is: %c\n", character);
+return 0;
+
+}
+enum Day{
+MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+}
+;
+int sumNumbers(int restricta, int restrictb){
+register int result;
+result=a+b;
+return result;
+
+}
+int testEnum(){
+enum DaycurrentDay=TUESDAY;
+int num1=5, num2=7;
+int sum=sumNumbers(num1, num2);
+printf("Today is ");
+switch (currentDay){
+  case MONDAY:printf("Monday");
+  break;
+  case TUESDAY:printf("Tuesday");
+  break;
+  case WEDNESDAY:printf("Wednesday");
+  break;
+  case THURSDAY:printf("Thursday");
+  break;
+  case FRIDAY:printf("Friday");
+  break;
+  case SATURDAY:printf("Saturday");
+  break;
+  case SUNDAY:printf("Sunday");
+  break;
+  
+}
+printf(".\n");
+printf("The sum of %d and %d is %d.\n", num1, num2, sum);
+return 0;
+
+}
+typedef unsigned int uint;
+union Data{
+int intValue;
+float floatValue;
+char stringValue[20];
+
+}
+;
+int MoreKeywords(){
+int x=42;
+union DatamyData;
+myData.intValue=42;
+printf("Integer Value: %d\n", myData.intValue);
+myData.floatValue=3.14;
+printf("Float Value: %f\n", myData.floatValue);
+strcpy(myData.stringValue, "Hello, Union!");
+printf("String Value: %s\n", myData.stringValue);
+_Atomicint atomicValue=ATOMIC_VAR_INIT(0);
+atomic_store(&atomicValue, 10);
+int retrievedValue=atomic_load(&atomicValue);
+_Bool flag=1;
+if (flag){
+  printf("The flag is true.\n");
+  
+}
+else {
+  printf("The flag is false.\n");
+  
+}
+return 0;
+
+}
+_Noreturnvoid exitOnError(){
+printf("An error occurred. Exiting...\n");
+exit(1);
+
+}
+int main(){
+exitOnError();
+int intValue=42;
+double doubleValue=3.14;
+_Complex double complexValue=1.0+2.0*I;
+printValue(intValue);
+printValue(doubleValue);
+printValue(complexValue);
+double _Imaginary imaginaryValue=2.5*I;
+printf("Imaginary: %f + %fi\n", creal(imaginaryValue), cimag(imaginaryValue));
+return 0;
+
+}
+_Static_assert(sizeof(int )==4, "int must be 4 bytes on this platform");
+_Static_assert(_Alignof(double )==8, "double must be 8-byte aligned on this platform");
+_Thread_localint threadLocalVar=0;
+int otherFunc(){
+printf("Size of int: %zu bytes\n", sizeof(int ));
+printf("Alignment of double: %zu bytes\n", _Alignof(double ));
+threadLocalVar=42;
+int atomicValue=ATOMIC_VAR_INIT(0);
+atomic_store(&atomicValue, 10);
+int retrievedValue=atomic_load(&atomicValue);
+printf("Thread-Local Variable: %d\n", threadLocalVar);
+printf("Atomic Variable: %d\n", retrievedValue);
+return 0;
+
+}
+struct Node{
+int data;
+struct Node*next;
+
+}
+;
+struct Node*createNode(int data){
+struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
+if (newNode==NULL){
+  printf("Memory allocation failed.\n");
+  exit(1);
+  
+}
+newNode->data=data;
+newNode->next=NULL;
+return newNode;
+
+}
+struct Node*insertAtBeginning(struct Node*head, int data){
+struct Node*newNode=createNode(data);
+newNode->next=head;
+return newNode;
+
+}
+void printList(struct Node*head){
+struct Node*current=head;
+while (current!=NULL){
+  printf("%d -> ", current->data);
+  current=current->next;
+  
+}
+printf("NULL\n");
+
+}
+int search(struct Node*head, int target){
+struct Node*current=head;
+while (current!=NULL){
+  if (current->data==target){
+      return 1;
+      
+  }
+  current=current->next;
+  
+}
+return 0;
+
+}
+struct Node*deleteNode(struct Node*head, int target){
+if (head==NULL){
+  return head;
+  
+}
+if (head->data==target){
+  struct Node*temp=head;
+  head=head->next;
+  free(temp);
+  return head;
+  
+}
+struct Node*current=head;
+while (current->next!=NULL&&current->next->data!=target){
+  current=current->next;
+  
+}
+if (current->next==NULL){
+  return head;
+  
+}
+struct Node*temp=current->nextcurrent->next=current->next->next;
+free(temp);
+return head;
+
+}
+void freeList(struct Node*head){
+struct Node*current=head;
+while (current!=NULL){
+  struct Node*temp=current;
+  current=current->next;
+  free(temp);
+  
+}
+
+}
+int moretest(){
+struct Node*head=NULL;
+head=insertAtBeginning(head, 3);
+head=insertAtBeginning(head, 2);
+head=insertAtBeginning(head);
+printf("Original List: ");
+printList(head);
+if (search(head, 2)){
+  printf("Element 2 found in the list.\n");
+  
+}
+else {
+  printf("Element 2 not found in the list.\n");
+  
+}
+head=deleteNode(head, 2);
+printf("List after deleting 2: ");
+printList(head);
+freeList(head);
+
+}

@@ -1,0 +1,5 @@
+flex flex.l
+cc lex.yy.c -lfl
+gcc scanner.c tokenTypes.h lex.yy.c -o test
+gcc scanner.c tokenTypes.h lex.yy.c -o test -lm
+./test test.c

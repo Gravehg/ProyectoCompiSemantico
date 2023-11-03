@@ -1,0 +1,448 @@
+int main(){
+        printf("%d\n", P + Q);
+        
+}
+unsigned long long factorial(int n){
+        if (n == 0 || n == 1){
+                return 1;
+                
+        }
+        else {
+                return n *factorial(n - 1);
+                
+        }
+        
+}
+int useFact(){
+        int number;
+        printf("Enter a non-negative integer: ");
+        scanf("%d",  & number);
+        if (number < 0){
+                printf("Factorial is not defined for negative numbers.\n");
+                
+        }
+        else {
+                unsigned long long result = factorial(number);
+                printf("Factorial of %d is %llu\n", number, result);
+                
+        }
+        return 0;
+        
+}
+struct Node{
+        int data;
+        struct Node *next;
+        
+}
+;
+struct Node *createNode(int data){
+        struct Node *newNode = (struct Node *)malloc( sizeof(struct Node));
+        if (newNode == NULL){
+                printf("Memory allocation failed.\n");
+                exit(1);
+                
+        }
+        newNode->data = data;
+        newNode->next = NULL;
+        return newNode;
+        
+}
+struct Node *insertAtBeginning(struct Node *head, int data){
+        struct Node *newNode = createNode(data);
+        newNode->next = head;
+        return newNode;
+        
+}
+struct Node *insertAtEnd(struct Node *head, int data){
+        struct Node *newNode = createNode(data);
+        if (head == NULL){
+                return newNode;
+                
+        }
+        struct Node *current = head;
+        while (current->next != NULL){
+                current = current->next;
+                
+        }
+        current->next = newNode;
+        return head;
+        
+}
+void printList(struct Node *head){
+        struct Node *current = head;
+        while (current != NULL){
+                printf("%d -> ", current->data);
+                current = current->next;
+                
+        }
+        printf("NULL\n");
+        
+}
+int search(struct Node *head, int target){
+        struct Node *current = head;
+        while (current != NULL){
+                if (current->data == target){
+                        return 1;
+                        
+                }
+                current = current->next;
+                
+        }
+        return 0;
+        
+}
+struct Node *deleteNode(struct Node *head, int target){
+        if (head == NULL){
+                return head;
+                
+        }
+        if (head->data == target){
+                struct Node *temp = head;
+                head = head->next;
+                free(temp);
+                return head;
+                
+        }
+        struct Node *current = head;
+        while (current->next != NULL && current->next->data != target){
+                current = current->next;
+                
+        }
+        if (current->next == NULL){
+                return head;
+                
+        }
+        struct Node *temp = current->next;
+        current->next = current->next->next;
+        free(temp);
+        return head;
+        
+}
+void freeList(struct Node *head){
+        struct Node *current = head;
+        while (current != NULL){
+                struct Node *temp = current;
+                current = current->next;
+                free(temp);
+                
+        }
+        
+}
+int main(){
+        struct Node *head = NULL;
+        head = insertAtBeginning(head, 3);
+        head = insertAtBeginning(head, 2);
+        head = insertAtBeginning(head, 1);
+        printf("Original List: ");
+        printList(head);
+        if (search(head, 2)){
+                printf("Element 2 found in the list.\n");
+                
+        }
+        else {
+                printf("Element 2 not found in the list.\n");
+                
+        }
+        head = deleteNode(head, 2);
+        printf("List after deleting 2: ");
+        printList(head);
+        freeList(head);
+        return 0;
+        
+}
+struct Node{
+        int data;
+        struct Node *left;
+        struct Node *right;
+        
+}
+;
+struct Node *createNode(int data){
+        struct Node *newNode = (struct Node *)malloc( sizeof(struct Node));
+        if (newNode == NULL){
+                printf("Memory allocation failed.\n");
+                exit(1);
+                
+        }
+        newNode->data = data;
+        newNode->left = NULL;
+        newNode->right = NULL;
+        return newNode;
+        
+}
+struct Node *insert(struct Node *root, int data){
+        if (root == NULL){
+                return createNode(data);
+                
+        }
+        if (data < root->data){
+                root->left = insert(root->left, data);
+                
+        }
+        else if (data > root->data){
+                root->right = insert(root->right, data);
+                
+        }
+        return root;
+        
+}
+void inOrderTraversal(struct Node *root){
+        if (root != NULL){
+                inOrderTraversal(root->left);
+                printf("%d ", root->data);
+                inOrderTraversal(root->right);
+                
+        }
+        
+}
+struct Node *search(struct Node *root, int key){
+        if (root == NULL || root->data == key){
+                return root;
+                
+        }
+        if (key < root->data){
+                return search(root->left, key);
+                
+        }
+        else {
+                return search(root->right, key);
+                
+        }
+        
+}
+int testTree(){
+        struct Node *root = NULL;
+        root = insert(root, 50);
+        insert(root, 30);
+        insert(root, 20);
+        insert(root, 40);
+        insert(root, 70);
+        insert(root, 60);
+        insert(root, 80);
+        printf("In-Order Traversal: ");
+        inOrderTraversal(root);
+        printf("\n");
+        int key = 40;
+        struct Node *result = search(root, key);
+        if (result != NULL){
+                printf("Element %d found in the tree.\n", key);
+                
+        }
+        else {
+                printf("Element %d not found in the tree.\n", key);
+                
+        }
+        return 0;
+        
+}
+int globalVar = 42;
+int varDecl(){
+        int localVar = 10;
+        char charVar = 'A';
+        double doubleVar = 3.14159;
+        void greet();
+        void ( *functionPtr)();
+        struct Person{
+                char name[50];
+                int age;
+                
+        }
+        ;
+        struct Personperson1;
+        typedef unsigned int uint;
+        int positiveInt = 100;
+        printf("Global Variable: %d\n", globalVar);
+        printf("Local Variable: %d\n", localVar);
+        printf("Character Variable: %c\n", charVar);
+        printf("Double Variable: %lf\n", doubleVar);
+        person1.age = 25;
+        strcpy(person1.name, "John Doe");
+        printf("Person: %s, Age: %d\n", person1.name, person1.age);
+        greet();
+        return 0;
+        
+}
+void greet(){
+        printf("Hello, World!\n");
+        
+}
+int align(){
+         _Alignas(16)char alignedCharArray[32];
+        printf("Alignment of alignedCharArray: %zu\n",  _Alignof(int ));
+        return 0;
+        
+}
+int useCOnst(){
+        const int constantValue = 42;
+        printf("The constant value is: %d\n", constantValue);
+        return 0;
+        
+}
+int add(int a, int b){
+        return a + b;
+        
+}
+int testadd(){
+        int result = add(5, 3);
+        printf("5 + 3 = %d\n", result);
+        return 0;
+        
+}
+int testForBreak(){
+        for (int i = 1;i <= 5;i ++){
+                if (i == 3){
+                         break;
+                        
+                }
+                printf("i = %d\n", i);
+                
+        }
+        return 0;
+        
+}
+int switchTest(){
+        int day = 2;
+        switch (day){
+                case 1 : printf("Monday\n");
+                 break;
+                case 2 : printf("Tuesday\n");
+                 break;
+                case 3 : printf("Wednesday\n");
+                 break;
+                default  : printf("Other day\n");
+                
+        }
+        return 0;
+        
+}
+int testTernary(){
+        int number = 7;
+        const char  *result = (number % 2 == 0) ? "even"  : "odd";
+        printf("The number %d is %s.\n", number, result);
+        return 0;
+        
+}
+struct Point{
+        int x;
+        int y;
+        
+}
+;
+union DataPoint{
+        struct Pointpoint;
+        int coordinates[2];
+        
+}
+;
+int counter(){
+         staticint count = 0;
+        count ++;
+        return count;
+        
+}
+int testStructs(){
+        printf("Counter: %d\n", counter());
+        printf("Counter: %d\n", counter());
+        struct Pointp1;
+        p1.x = 5;
+        p1.y = 10;
+        union DataPointdp1;
+        dp1.point = p1;
+        printf("Coordinates from Union: x=%d, y=%d\n", dp1.coordinates[0], dp1.coordinates[1]);
+        int i = 1;
+        while (i <= 5){
+                printf("%d ", i);
+                i ++;
+                
+        }
+        printf("\n");
+        return 0;
+        
+}
+int test2(){
+        int  *a = malloc( sizeof(int ) *10000);
+        if (a == NULL){
+                printf("Memory allocation failed.\n");
+                return 1;
+                
+        }
+        srand(time(NULL));
+        for (int i = 0;i;i ++){
+                a[i] = rand() % 100;
+                
+        }
+        double sum = 0;
+        for (int i = 0;i;i ++){
+                sum += a[i];
+                
+        }
+        double mean = sum / 10000;
+        double variance = 0;
+        for (int i = 0;i < 10000;i ++){
+                variance += pow(a[i] - mean, 2);
+                
+        }
+        double standardDeviation = sqrt(variance);
+        printf("The standard deviation of 10000 random integers is: %lf\n", standardDeviation);
+        free(a);
+        return 0;
+        
+}
+int test3(){
+        int  *arr;
+        int  *reversed_arr;
+        int n10;
+        int i, j;
+        arr = (int  *)malloc(n * sizeof(int ));
+        reversed_arr = (int  *)malloc(n * sizeof(int ));
+        if (arr == NULL || reversed_arr == NULL){
+                printf("Memory allocation failed.\n");
+                return 1;
+                
+        }
+        printf("Enter %d numbers:\n", n);
+        for (i = 0;i < n;i ++){
+                scanf("%d",  & arr[i]);
+                
+        }
+        for (i = 0, j = n - 1;i < n;i ++, j --){
+                reversed_arr[i] = arr[j];
+                
+        }
+        printf("Original array: ");
+        for (i = 0;i < n;i ++){
+                printf("%d ", arr[i]);
+                
+        }
+        printf("\nReversed array: ");
+        for (i = 0;i < n;i ++){
+                printf("%d ", reversed_arr[i]);
+                
+        }
+        printf("\n");
+        free(arr);
+        free(reversed_arr);
+        return 0;
+        
+}
+int test4(){
+        char  *sentence1 = (char  *)malloc(100 * sizeof(char ));
+        char  *sentence2 = (char  *)malloc(100 * sizeof(char ));
+        if (sentence1 == ){
+                printf("Memory allocation failed.\n");
+                return 1;
+                
+        }
+        printf("Enter a sentence: ");
+        fgets(sentence1, 100, stdin);
+        int len = strlen(sentence1);
+        for (int i = 0;i < len;i ++){
+                sentence2[i] = sentence1[i];
+                
+        }
+        printf("Original Sentence: %s", sentence1);
+        printf("Copied Sentence: %s", sentence2);
+        free(sentence1);
+        free(sentence2);
+        
+}

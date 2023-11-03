@@ -1,0 +1,413 @@
+struct Node{
+  int data;
+  struct Node*prev;
+  struct Node*next;
+  
+}
+;
+struct Node*createNode(int data){
+  struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
+  if (newNode==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  newNode->data=data;
+  newNode->prev=NULL;
+  newNode->next=NULL;
+  return newNode;
+  
+}
+struct Node*initializeDoublyLinkedList(){
+  return NULL;
+  
+}
+struct Node*append(struct Node*head, int data){
+  struct Node*newNode=createNode(data);
+  if (head==NULL){
+      return newNode;
+      
+  }
+  struct Node*current=head;
+  while (current->next!=NULL){
+      current=current->next;
+      
+  }
+  current->next=newNode;
+  newNode->prev=current;
+  return head;
+  
+}
+void printDoublyLinkedList(struct Node*head){
+  struct Node*current=head;
+  while (current!=NULL){
+      printf("%d -> ", current->data);
+      current=current->next;
+      
+  }
+  printf("NULL\n");
+  
+}
+struct Node*shiftBitsLeft(struct Node*head, int positions){
+  struct Node*current=head;
+  while (current!=NULL){
+      current->data=current->data<<positions;
+      current=current->next;
+      
+  }
+  return head;
+  
+}
+struct Node*shiftBitsRight(struct Node*head, int positions){
+  struct Node*current=head;
+  while (current!=NULL){
+      current->data=current->data>>positions;
+      current=current->next;
+      
+  }
+  return head;
+  
+}
+void freeDoublyLinkedList(struct Node*head){
+  struct Node*current=head;
+  while (current!=NULL){
+      struct Node*temp=current;
+      current=current->next;
+      free(temp);
+      
+  }
+  
+}
+int testDLINKEDLIST(){
+  struct Node*myList=initializeDoublyLinkedList();
+  myList=append(myList, 5);
+  myList=append(myList, 10);
+  myList=append(myList, 15);
+  myList=append(myList, 20);
+  printf("Original List: ");
+  printDoublyLinkedList(myList);
+  myList=shiftBitsLeft(myList, 2);
+  printf("After Shifting Bits Left: ");
+  printDoublyLinkedList(myList);
+  myList=shiftBitsRight(myList, 1);
+  printf("After Shifting Bits Right: ");
+  printDoublyLinkedList(myList);
+  freeDoublyLinkedList(myList);
+  return 0;
+  
+}
+struct MyStruct{
+  int member1;
+  float member2;
+  
+}
+;
+union MyUnion{
+  int intValue;
+  float floatValue;
+  
+}
+;
+volatileint volatileVar=0;
+inlineint add(int a, int b){
+  return a+b;
+  
+}
+externint externalVar;
+int testVolatile(){
+  struct MyStructstructVar;
+  union MyUnionunionVar;
+  structVar.member1=42;
+  structVar.member2=3.14;
+  unionVar.intValue=100;
+  short shortVar=5;
+  int i=0;
+  while (i<5){
+      printf("Iteration %d: %d\n", i, i*shortVar);
+      i++;
+      
+  }
+  int sum=add(3, 7);
+  printf("Sum: %d\n", sum);
+  printf("Volatile Variable: %d\n", volatileVar);
+  printf("External Variable: %d\n", externalVar);
+  return 0;
+  
+}
+externint externalVar=50;
+int operators(){
+  int a=10, b=3;
+  printf("Addition: %d + %d = %d\n", a, b, a+b);
+  printf("Subtraction: %d - %d = %d\n", a, b, a-b);
+  printf("Multiplication: %d * %d = %d\n", a, b, a*b);
+  printf("Division: %d / %d = %d\n", a, b, a/b);
+  printf("Modulus: %d %% %d = %d\n", a, b, a%b);
+  int x=5, y=8;
+  printf("Equal: %d == %d is %s\n", x, y, x==y?"true" :"false");
+  printf("Not Equal: %d != %d is %s\n", x, y, x!=y?"true" :"false");
+  printf("Greater Than: %d > %d is %s\n", x, y, x>y?"true" :"false");
+  printf("Less Than: %d < %d is %s\n", x, y, x<y?"true" :"false");
+  printf("Greater Than or Equal: %d >= %d is %s\n", x, y, x>=y?"true" :"false");
+  printf("Less Than or Equal: %d <= %d is %s\n", x, y, x<=y?"true" :"false");
+  int p=1, q=0;
+  printf("Logical AND: %d && %d = %d\n", p, q, p&&q);
+  printf("Logical OR: %d || %d = %d\n", p, q, p||q);
+  printf("Logical NOT: !%d = %d, !%d = %d\n", p, !p, q, !q);
+  int num1=5, num2=3;
+  printf("Bitwise AND: %d & %d = %d\n", num1, num2, num1&num2);
+  printf("Bitwise OR: %d | %d = %d\n", num1, num2, num1|num2);
+  printf("Bitwise XOR: %d ^ %d = %d\n", num1, num2, num1^num2);
+  printf("Bitwise NOT: ~%d = %d, ~%d = %d\n", num1, ~num1, num2, ~num2);
+  int result=0;
+  result+=10;
+  result-=4;
+  result*=3;
+  result/=2;
+  result%=5;
+  printf("Assignment Result: %d\n", result);
+  int count=5;
+  printf("Original Count: %d\n", count);
+  printf("Post-increment: %d\n", count++);
+  printf("After Post-increment: %d\n", count);
+  printf("Pre-increment: %d\n", ++count);
+  printf("After Pre-increment: %d\n", count);
+  printf("Post-decrement: %d\n", count--);
+  printf("After Post-decrement: %d\n", count);
+  printf("Pre-decrement: %d\n", --count);
+  printf("After Pre-decrement: %d\n", count);
+  int number=12;
+  char *resultStr=(number%2==0)?"Even" :"Odd";
+  printf("Number %d is %s\n", number, resultStr);
+  return 0;
+  
+}
+int array(){
+  int numbers[5]={
+      1, 2, 3, 4, 5
+  }
+  ;
+  printf("Element at index 0: %d\n", numbers[0]);
+  printf("Element at index 2: %d\n", numbers[2]);
+  numbers[1]=10;
+  numbers[3]=20;
+  printf("Modified Array: ");
+  for (int i=0;i<5;i++){
+      printf("%d ", numbers[i]);
+      
+  }
+  printf("\n");
+  int matrix[3][3]={
+      {
+            1, 2, 3
+      }
+      , {
+            4, 5, 6
+      }
+      , {
+            7, 8, 9
+      }
+      
+  }
+  ;
+  printf("Element at (1, 2): %d\n", matrix[1][2]);
+  printf("Element at (2, 0): %d\n", matrix[2][0]);
+  char greeting[]="Hello, C!";
+  printf("Character array: %s\n", greeting);
+  printf("Character at index 7: %c\n", greeting[7]);
+  printf("Character at index 2: %c\n", greeting[2]);
+  return 0;
+  
+}
+int memoryManagement(){
+  int size=5;
+  int *dynamicArray=(int *)malloc(size*sizeof(int ));
+  if (dynamicArray==NULL){
+      fprintf(stderr, "Memory allocation failed. Exiting...\n");
+      return 1;
+      
+  }
+  for (int i=0;i<size;i++){
+      dynamicArray[i]=i*10;
+      
+  }
+  printf("Dynamic Array Values: ");
+  for (int i=0;i<size;i++){
+      printf("%d ", *(dynamicArray+i));
+      
+  }
+  printf("\n");
+  for (int i=0;i<size;i++){
+      *(dynamicArray+i)+=5;
+      
+  }
+  printf("Modified Dynamic Array: ");
+  for (int i=0;i<size;i++){
+      printf("%d ", dynamicArray[i]);
+      
+  }
+  printf("\n");
+  free(dynamicArray);
+  return 0;
+  
+}
+enum DaysOfWeek{
+  Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+}
+;
+void printDay(enum DaysOfWeekday){
+  switch (day){
+      case Sunday:printf("Sunday\n");
+      break;
+      case Monday:printf("Monday\n");
+      break;
+      case Tuesday:printf("Tuesday\n");
+      break;
+      case Wednesday:printf("Wednesday\n");
+      break;
+      case Thursday:printf("Thursday\n");
+      break;
+      case Friday:printf("Friday\n");
+      break;
+      case Saturday:printf("Saturday\n");
+      break;
+      default :printf("Invalid day\n");
+      
+  }
+  
+}
+int enumTest(){
+  enum DaysOfWeektoday=Tuesday;
+  printf("Today is ");
+  printDay(today);
+  return 0;
+  
+}
+int forLoop(){
+  printf("Using a for loop:\n");
+  for (int i=1;i<=5;i++){
+      printf("%d ", i);
+      
+  }
+  printf("\n");
+  int numbers[]={
+      10, 20, 30, 40, 50
+  }
+  ;
+  printf("Using a for loop to iterate over an array:\n");
+  for (int i=0;i<5;i++){
+      printf("Element %d: %d\n", i, numbers[i]);
+      
+  }
+  return 0;
+  
+}
+int dowhileLoop(){
+  printf("Using a do-while loop:\n");
+  int i=1;
+  do {
+      printf("%d ", i);
+      i++;
+      
+  }
+  while (i<=5);
+  printf("\n");
+  int number;
+  do {
+      printf("Enter a positive number: ");
+      scanf("%d", &number);
+      
+  }
+  while (number<=0);
+  printf("You entered a positive number: %d\n", number);
+  return 0;
+  
+}
+int whileLoop(){
+  printf("Using a while loop:\n");
+  int i=1;
+  while (i<=5){
+      printf("%d ", i);
+      i++;
+      
+  }
+  printf("\n");
+  int powerOf2=1;
+  while (powerOf2<=100){
+      powerOf2*=2;
+      
+  }
+  printf("First power of 2 greater than 100: %d\n", powerOf2);
+  return 0;
+  
+}
+_Static_assert(ENABLE_FEATURE==1, "Feature must be enabled");
+void merge(int arr[], int left, int middle, int right){
+  int i, j, k;
+  int n1=middle-left+1;
+  int n2=right-middle;
+  int L[n1], R[n2];
+  for (i=0;i<n1;i++)L[i]=arr[left+i];
+  for (j=0;j<n2;j++)R[j]=arr[middle+1+j];
+  i=0;
+  j=0;
+  k=left;
+  while (i<n1&&j<n2){
+      if (L[i]<=R[j]){
+            arr[k]=L[i];
+            i++;
+            
+      }
+      else {
+            arr[k]=R[j];
+            j++;
+            
+      }
+      k++;
+      
+  }
+  while (i<n1){
+      arr[k]=L[i];
+      i++;
+      k++;
+      
+  }
+  while (j<n2){
+      arr[k]=R[j];
+      j++;
+      k++;
+      
+  }
+  
+}
+void mergeSort(int arr[], int left, int right){
+  if (left<right){
+      int middle=left+(right-left)/2;
+      mergeSort(arr, left, middle);
+      mergeSort(arr, middle+1, right);
+      merge(arr, left, middle, right);
+      
+  }
+  
+}
+int testMergeSort(){
+  int arr[]={
+      12, 11, 13, 5, 6, 7
+  }
+  ;
+  int arrSize=sizeof(arr)/sizeof(arr[0]);
+  printf("Original array: ");
+  for (int i=0;i<arrSize;i++){
+      printf("%d ", arr[i]);
+      
+  }
+  printf("\n");
+  mergeSort(arr, 0, arrSize-1);
+  printf("Sorted array: ");
+  for (int i=0;i<arrSize;i++){
+      printf("%d ", arr[i]);
+      
+  }
+  printf("\n");
+  return 0;
+  
+}
