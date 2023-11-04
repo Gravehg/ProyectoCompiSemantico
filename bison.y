@@ -125,6 +125,9 @@ identifier:
 		  IDENTIFIER {write($1);
 		  			 if(!isDeclaration){
 						checkInTable($1);
+					 }else{
+						isDeclaration =  0;
+						push(createData("identifier",$1));
 					 }
 		   }
 		  ;
@@ -447,6 +450,10 @@ for:
 	FOR  {writeIteration($1);forFlag=1;}
 	;
 
+prepareIdInsertion:
+	%empty  {isDeclaration = 1;}
+	;
+
 primary_expression
 	: identifier 
 	| constant
@@ -676,18 +683,18 @@ storage_class_specifier
 	;
 
 type_specifier
-	: void 
-	| char 
-	| short 
-	| int  
-	| long 
-	| float 
-	| double 
-	| signed 
-	| unsigned  
-	| bool 
-	| complex 
-	| imaginary 	 	/* non-mandated extension */
+	: void {push(createData("type","void"));}
+	| char {push(createData("type","char"));}
+	| short {push(createData("type","short"));}
+	| int  {push(createData("type","int"));}
+	| long {push(createData("type","long"));}
+	| float {push(createData("type","float"));}
+	| double {push(createData("type","double"));}
+	| signed  {push(createData("type","signed"));}
+	| unsigned  {push(createData("type","unsigned"));}
+	| bool {push(createData("type","bool"));}
+	| complex  {push(createData("type","complex"));}
+	| imaginary 	{push(createData("type","imaginary"));} 	/* non-mandated extension */
 	| atomic_type_specifier
 	| struct_or_union_specifier
 	| enum_specifier
@@ -696,15 +703,15 @@ type_specifier
 
 struct_or_union_specifier
 	: struct_or_union leftbracket struct_declaration_list rightbracket
-	| struct_or_union identifier leftbracket struct_declaration_list rightbracket
-	| struct_or_union identifier
+	| struct_or_union prepareIdInsertion identifier leftbracket struct_declaration_list rightbracket
+	| struct_or_union prepareIdInsertion identifier
 	| struct_or_union error rightbracket {yyerrok;}
 	| struct_or_union error identifier rightbracket {yyerrok;}
 	;
 
 struct_or_union
-	: struct  
-	| union 
+	: struct  {push(createData("type","struct"));} 
+	| union  {push(createData("type","union"));} 
 	;
 
 struct_declaration_list
@@ -740,9 +747,9 @@ struct_declarator
 enum_specifier
 	: enum leftbracket enumerator_list rightbracket
 	| enum leftbracket enumerator_list comma rightbracket
-	| enum identifier leftbracket enumerator_list rightbracket
-	| enum identifier leftbracket enumerator_list comma rightbracket
-	| enum identifier
+	| enum prepareIdInsertion identifier leftbracket enumerator_list rightbracket
+	| enum prepareIdInsertion identifier leftbracket enumerator_list comma rightbracket
+	| enum prepareIdInsertion identifier
 	;
 
 enumerator_list
@@ -752,8 +759,8 @@ enumerator_list
 	;
 
 enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
-	: enumeration_constant equals constant_expression
-	| enumeration_constant 
+	: prepareIdInsertion enumeration_constant equals constant_expression
+	| prepareIdInsertion enumeration_constant 
 	;
 
 atomic_type_specifier
@@ -785,7 +792,7 @@ declarator
 	;
 
 direct_declarator
-	: identifier
+	: prepareIdInsertion identifier 
 	| leftparen declarator rightparen
 	| direct_declarator leftsquarebracket rightsquarebracket
 	| direct_declarator leftsquarebracket asterisk rightsquarebracket
@@ -835,8 +842,8 @@ parameter_declaration
 	;
 
 identifier_list
-	: identifier 
-	| identifier_list comma identifier
+	: prepareIdInsertion identifier 
+	| identifier_list comma prepareIdInsertion identifier
 	| identifier_list error identifier {yyerrok;}
 	;
 
@@ -903,7 +910,7 @@ designator_list
 
 designator
 	: leftsquarebracket constant_expression rightsquarebracket
-	| point identifier
+	| point prepareIdInsertion identifier
 	;
 
 static_assert_declaration
