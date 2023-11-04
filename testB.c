@@ -1,11 +1,11 @@
 int main() {
-    int n;
     printf("Ingrese el número de estudiantes: ");
     scanf("%d", &n);
 
     struct Estudiante estudiantes[n];
 
     for (int i = 0; i < n; i++) {
+        char* name;
         printf("Ingrese el nombre del estudiante %d: ", i + 1);
         scanf("%s", estudiantes[i].nombre);
 
@@ -27,3 +27,4 @@ int main() {
 
     return 0;
 }
+

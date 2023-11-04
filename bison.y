@@ -1026,6 +1026,7 @@ void yyerror(const char *s)
 void checkInTable(char *id){
 	if(!lookup(id)){
 		semanticError("Tried to use variable without declaration");
+		insert(id);
 	}
 }
 

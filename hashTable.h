@@ -21,6 +21,8 @@ void openScope();
 void closeScope();
 int lookup(char *id);
 int lookupLocal(char *id);
+void fillSpaces(int remaining);
+
 
 extern struct SymbolTable *sym;
 
