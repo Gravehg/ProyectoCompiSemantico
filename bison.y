@@ -1,6 +1,7 @@
 %{
     #include <stdio.h>
 	#include <string.h>
+	#include "hashTable.h"
 	extern int yylex();
 	extern char*yytext;
 	extern char linebuf[500];
@@ -27,6 +28,10 @@
 	void writeIteration(char*s);
 	void writeFile(char*s);
 	extern int yylineno;
+	void checkInTable(char *id);
+	void semanticError(char *s);
+	//FLAGS TO DETERMINE IF ITS A DECLARATION OR USAGE
+	int isDeclaration = 0;
 %}
 
 %locations
@@ -116,7 +121,11 @@
 %%
 
 identifier: 
-		  IDENTIFIER {write($1);}
+		  IDENTIFIER {write($1);
+		  			 if(!isDeclaration){
+						checkInTable($1);
+					 }
+		   }
 		  ;
 
 i_constant:
@@ -332,10 +341,10 @@ semmicolon:
 	SEMMICOLON  {write($1);}
 	;
 leftbracket:
-	LEFTBRACKET  {write($1);}
+	LEFTBRACKET  {write($1); openScope();}
 	;
 rightbracket:
-	RIGHTBRACKET  {write($1);}
+	RIGHTBRACKET  {write($1);  printSymTab(); closeScope();}
 	;
 leftparen:
 	LEFTPAREN  {write($1);}
@@ -996,6 +1005,25 @@ void yyerror(const char *s)
   printf("%s%s%d%s%d: ",fileName,":",yylloc.first_line,":",yylloc.first_column);
   printf("\033[1;31merror\033[0m ");
   printf("%s\n",s);
+  printf("Near line %d, in token: \'%s\'\n", yylloc.first_line,yytext);
+  printTabs();
+  printf("%s\n", linebuf);
+  printTabs();
+  printSpaces(yylloc.first_column);
+  printf("^");
+  printf("\n");
+}
+
+void checkInTable(char *id){
+	if(!lookup(id)){
+		semanticError("Tried to use variable without declaration");
+	}
+}
+
+void semanticError(char *s){
+  printf("%s\n",s);
+  printf("%s%s%d%s%d: ",fileName,":",yylloc.first_line,":",yylloc.first_column);
+  printf("\033[0;34merror\033[0m ");
   printf("Near line %d, in token: \'%s\'\n", yylloc.first_line,yytext);
   printTabs();
   printf("%s\n", linebuf);

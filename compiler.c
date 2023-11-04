@@ -5,6 +5,7 @@
 #include "bison.tab.h"
 #include <stdlib.h>
 #include <math.h>
+#include "hashTable.h"
 #define MAX_HORIZONTAL_CHAR 46
 #define MAX_VERTICAL_CHAR 8
 
@@ -154,6 +155,7 @@ int main(int argc, char *argv[]) {
     char *prettyFileName = strcat(argv[1],".pretty");
     yyout = fopen(prettyFileName,"w");
     yydebug = 0;
+    initSymTab();
     if(yyparse()){
         printf("There has been an error\n");
         exit(1);
