@@ -3,7 +3,7 @@ CC = cc
 
 
 # Source files
-SRC_FILES = lex.yy.c bison.tab.c include.c compiler.c defineOne.c replaceDefines.c eliminateDefines.c hashTable.c  
+SRC_FILES = lex.yy.c bison.tab.c include.c compiler.c defineOne.c replaceDefines.c eliminateDefines.c hashTable.c  stack.c
 
 LIBRARIES =  -lfl -lm
 

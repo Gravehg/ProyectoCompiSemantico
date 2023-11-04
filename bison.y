@@ -2,6 +2,7 @@
     #include <stdio.h>
 	#include <string.h>
 	#include "hashTable.h"
+	#include "stack.h"
 	extern int yylex();
 	extern char*yytext;
 	extern char linebuf[500];

@@ -107,3 +107,14 @@ int lookup(char *id){
 
     return 0;
 }
+
+//CHECK ONLY CURRENT SCOPE
+int lookupLocal(char *id){
+    int h = hash(id);
+    List l = sym->hashTable[h];
+    while(l != NULL){
+        if(strcmp(id,l->id) == 0) return 1;
+        l = l->next;
+    }
+    return 0;
+}
