@@ -502,5 +502,8 @@ head = deleteNode(head, 2);
 printf("List after deleting 2: ");
 printList(head);
 freeList(head);
+int x;
+float x;
+return 0;
 
 }

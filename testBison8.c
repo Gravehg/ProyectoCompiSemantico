@@ -552,7 +552,10 @@ int moretest() {
     printf("List after deleting 2: ");
     printList(head);
 
-    freeList(head) // Free memory to avoid memory leaks.
+    freeList(head); // Free memory to avoid memory leaks.
+
+    int x;
+    float x;
 
     return 0;
 }

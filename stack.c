@@ -7,7 +7,8 @@ struct Stack *stack = NULL;
 
 void createStack(){
     stack = (struct Stack*)malloc(sizeof(struct Stack));
-    stack->top = NULL;
+    stack->top = createNode(createData("start",""));
+    stack->size = 0;
 }
 
 struct Node* createNode(struct Data* data){
@@ -43,7 +44,7 @@ struct Node* retrieve(char* type) {
 }
 
 struct Data* pop(){
-    if(stack->top == NULL){
+    if(stack->top == NULL || stack->size == 0){
         printf("The semantic stack is empty");
         return NULL;
     }

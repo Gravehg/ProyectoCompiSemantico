@@ -33,6 +33,7 @@
 	void semanticError(char *s);
 	//FLAGS TO DETERMINE IF ITS A DECLARATION OR USAGE
 	int isDeclaration = 0;
+	void end_decl();
 %}
 
 %locations
@@ -125,9 +126,9 @@ identifier:
 		  IDENTIFIER {write($1);
 		  			 if(!isDeclaration){
 						checkInTable($1);
-					 }else{
-						isDeclaration =  0;
+					 }else{	
 						push(createData("identifier",$1));
+						isDeclaration =  0;
 					 }
 		   }
 		  ;
@@ -643,8 +644,8 @@ constant_expression
 	;
 
 declaration
-	: declaration_specifiers semmicolon 
-	| declaration_specifiers init_declarator_list semmicolon
+	: declaration_specifiers semmicolon {end_decl();}
+	| declaration_specifiers init_declarator_list semmicolon {end_decl();}
 	| declaration_specifiers error {yyerrok;}
 	| declaration_specifiers init_declarator_list error {yyerrok;}
 	| static_assert_declaration
@@ -830,8 +831,8 @@ parameter_type_list
 	;
 
 parameter_list
-	: parameter_declaration 
-	| parameter_list comma parameter_declaration
+	: parameter_declaration {end_decl();}
+	| parameter_list comma parameter_declaration {end_decl();}
 	| parameter_list error parameter_declaration {yyerrok;}
 	;
 
@@ -990,7 +991,7 @@ translation_unit
 	;
 
 external_declaration
-	: function_definition
+	: function_definition {end_decl();}
 	| declaration 
 	| PREPROCESSING error external_declaration {yyerrok;}
 	;
@@ -1204,3 +1205,21 @@ void writeIteration(char* s){
 // -> spaces between binary and ternary operators
 // -> no space between increment and decrement operators
 // -> no space around . and -> operators
+
+
+void end_decl(){
+	struct Node* nodeType = retrieve("type");
+	char *type = nodeType->element->text;
+	while(strcmp(stack->top->element->objectType,"identifier")==0){
+		// THERE IS ALREADY AN ID IN THIS SCOPE WITH THIS NAME
+		if(lookupLocal(stack->top->element->text)){
+			semanticError("Identifier is already defined in present scope");
+		}else{
+			insert(stack->top->element->text);
+		}
+		pop();
+	}
+	while(strcmp(stack->top->element->objectType,"type")==0){
+		pop();
+	}
+}

@@ -158,7 +158,6 @@ int main(int argc, char *argv[]) {
     yydebug = 0;
     initSymTab();
     createStack();
-    push(createData("j", "0"));
     if(yyparse()){
         printf("There has been an error\n");
         exit(1);

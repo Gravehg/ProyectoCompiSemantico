@@ -103,8 +103,9 @@
 	void semanticError(char *s);
 	//FLAGS TO DETERMINE IF ITS A DECLARATION OR USAGE
 	int isDeclaration = 0;
+	void end_decl();
 
-#line 108 "bison.tab.c"
+#line 109 "bison.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -808,48 +809,48 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   125,   125,   136,   140,   144,   148,   154,   157,   161,
-     165,   169,   173,   176,   179,   182,   185,   188,   191,   194,
-     197,   200,   203,   206,   209,   212,   215,   219,   222,   225,
-     228,   232,   236,   240,   243,   246,   249,   255,   258,   262,
-     266,   269,   273,   276,   279,   282,   285,   288,   291,   294,
-     297,   300,   304,   308,   312,   316,   319,   322,   325,   328,
-     331,   336,   340,   345,   348,   351,   354,   357,   360,   363,
-     366,   369,   373,   376,   379,   382,   385,   388,   391,   394,
-     397,   400,   403,   406,   409,   412,   415,   418,   421,   424,
-     427,   430,   435,   438,   441,   444,   447,   450,   454,   458,
-     459,   460,   461,   462,   463,   464,   465,   469,   470,   471,
-     475,   479,   483,   484,   488,   489,   493,   494,   495,   499,
-     500,   504,   505,   506,   507,   508,   509,   510,   511,   512,
-     513,   514,   515,   516,   517,   518,   519,   523,   524,   528,
-     529,   530,   531,   532,   533,   534,   535,   539,   540,   541,
-     542,   543,   544,   548,   549,   553,   554,   555,   556,   560,
-     561,   562,   566,   567,   568,   572,   573,   574,   575,   576,
-     580,   581,   582,   586,   587,   591,   592,   596,   597,   601,
-     602,   606,   607,   611,   612,   616,   617,   618,   619,   623,
-     624,   625,   626,   627,   628,   629,   630,   631,   632,   633,
-     637,   638,   642,   646,   647,   648,   649,   650,   654,   655,
-     656,   657,   658,   659,   660,   661,   662,   663,   667,   668,
-     672,   673,   677,   678,   679,   680,   681,   682,   686,   687,
-     688,   689,   690,   691,   692,   693,   694,   695,   696,   697,
-     698,   699,   700,   701,   705,   706,   707,   708,   709,   713,
-     714,   718,   719,   720,   724,   725,   726,   730,   731,   732,
-     733,   737,   738,   742,   743,   744,   748,   749,   750,   751,
-     752,   756,   757,   758,   762,   763,   767,   768,   772,   773,
-     774,   775,   779,   780,   784,   785,   786,   790,   791,   795,
-     796,   797,   798,   799,   800,   801,   802,   803,   804,   805,
-     806,   807,   808,   809,   810,   814,   815,   816,   817,   821,
-     822,   827,   828,   829,   833,   834,   835,   839,   840,   841,
-     845,   846,   847,   851,   852,   853,   857,   858,   859,   863,
-     864,   865,   866,   867,   868,   869,   870,   871,   872,   873,
-     874,   875,   876,   877,   878,   879,   880,   881,   882,   883,
-     884,   888,   889,   890,   894,   895,   896,   897,   898,   902,
-     906,   907,   908,   912,   913,   917,   921,   922,   923,   924,
-     925,   926,   930,   931,   932,   936,   937,   941,   942,   943,
-     947,   948,   952,   953,   954,   958,   959,   960,   961,   962,
-     963,   967,   968,   969,   970,   971,   972,   973,   974,   978,
-     979,   980,   981,   982,   983,   987,   988,   989,   993,   994,
-     995,   999,  1000,  1004,  1005
+       0,   126,   126,   137,   141,   145,   149,   155,   158,   162,
+     166,   170,   174,   177,   180,   183,   186,   189,   192,   195,
+     198,   201,   204,   207,   210,   213,   216,   220,   223,   226,
+     229,   233,   237,   241,   244,   247,   250,   256,   259,   263,
+     267,   270,   274,   277,   280,   283,   286,   289,   292,   295,
+     298,   301,   305,   309,   313,   317,   320,   323,   326,   329,
+     332,   337,   341,   346,   349,   352,   355,   358,   361,   364,
+     367,   370,   374,   377,   380,   383,   386,   389,   392,   395,
+     398,   401,   404,   407,   410,   413,   416,   419,   422,   425,
+     428,   431,   436,   439,   442,   445,   448,   451,   455,   459,
+     460,   461,   462,   463,   464,   465,   466,   470,   471,   472,
+     476,   480,   484,   485,   489,   490,   494,   495,   496,   500,
+     501,   505,   506,   507,   508,   509,   510,   511,   512,   513,
+     514,   515,   516,   517,   518,   519,   520,   524,   525,   529,
+     530,   531,   532,   533,   534,   535,   536,   540,   541,   542,
+     543,   544,   545,   549,   550,   554,   555,   556,   557,   561,
+     562,   563,   567,   568,   569,   573,   574,   575,   576,   577,
+     581,   582,   583,   587,   588,   592,   593,   597,   598,   602,
+     603,   607,   608,   612,   613,   617,   618,   619,   620,   624,
+     625,   626,   627,   628,   629,   630,   631,   632,   633,   634,
+     638,   639,   643,   647,   648,   649,   650,   651,   655,   656,
+     657,   658,   659,   660,   661,   662,   663,   664,   668,   669,
+     673,   674,   678,   679,   680,   681,   682,   683,   687,   688,
+     689,   690,   691,   692,   693,   694,   695,   696,   697,   698,
+     699,   700,   701,   702,   706,   707,   708,   709,   710,   714,
+     715,   719,   720,   721,   725,   726,   727,   731,   732,   733,
+     734,   738,   739,   743,   744,   745,   749,   750,   751,   752,
+     753,   757,   758,   759,   763,   764,   768,   769,   773,   774,
+     775,   776,   780,   781,   785,   786,   787,   791,   792,   796,
+     797,   798,   799,   800,   801,   802,   803,   804,   805,   806,
+     807,   808,   809,   810,   811,   815,   816,   817,   818,   822,
+     823,   828,   829,   830,   834,   835,   836,   840,   841,   842,
+     846,   847,   848,   852,   853,   854,   858,   859,   860,   864,
+     865,   866,   867,   868,   869,   870,   871,   872,   873,   874,
+     875,   876,   877,   878,   879,   880,   881,   882,   883,   884,
+     885,   889,   890,   891,   895,   896,   897,   898,   899,   903,
+     907,   908,   909,   913,   914,   918,   922,   923,   924,   925,
+     926,   927,   931,   932,   933,   937,   938,   942,   943,   944,
+     948,   949,   953,   954,   955,   959,   960,   961,   962,   963,
+     964,   968,   969,   970,   971,   972,   973,   974,   975,   979,
+     980,   981,   982,   983,   984,   988,   989,   990,   994,   995,
+     996,  1000,  1001,  1005,  1006
 };
 #endif
 
@@ -2820,932 +2821,962 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* identifier: IDENTIFIER  */
-#line 125 "bison.y"
+#line 126 "bison.y"
                              {write((yyvsp[0].stringValue));
 		  			 if(!isDeclaration){
 						checkInTable((yyvsp[0].stringValue));
-					 }else{
-						isDeclaration =  0;
+					 }else{	
 						push(createData("identifier",(yyvsp[0].stringValue)));
+						isDeclaration =  0;
 					 }
 		   }
-#line 2833 "bison.tab.c"
+#line 2834 "bison.tab.c"
     break;
 
   case 3: /* i_constant: I_CONSTANT  */
-#line 136 "bison.y"
+#line 137 "bison.y"
                                     {write((yyvsp[0].stringValue));}
-#line 2839 "bison.tab.c"
+#line 2840 "bison.tab.c"
     break;
 
   case 4: /* f_constant: F_CONSTANT  */
-#line 140 "bison.y"
+#line 141 "bison.y"
                                {write((yyvsp[0].stringValue));}
-#line 2845 "bison.tab.c"
+#line 2846 "bison.tab.c"
     break;
 
   case 5: /* string_literal: STRING_LITERAL  */
-#line 144 "bison.y"
+#line 145 "bison.y"
                                         {write((yyvsp[0].stringValue));}
-#line 2851 "bison.tab.c"
+#line 2852 "bison.tab.c"
     break;
 
   case 6: /* func_name: FUNC_NAME  */
-#line 148 "bison.y"
+#line 149 "bison.y"
                            {write((yyvsp[0].stringValue));}
-#line 2857 "bison.tab.c"
+#line 2858 "bison.tab.c"
     break;
 
   case 7: /* twopoints: TWOPOINTS  */
-#line 154 "bison.y"
+#line 155 "bison.y"
                    {writeBinary((yyvsp[0].stringValue));}
-#line 2863 "bison.tab.c"
+#line 2864 "bison.tab.c"
     break;
 
   case 8: /* equals: EQUALS  */
-#line 157 "bison.y"
+#line 158 "bison.y"
                 {writeBinary((yyvsp[0].stringValue));}
-#line 2869 "bison.tab.c"
+#line 2870 "bison.tab.c"
     break;
 
   case 9: /* left_op: LEFT_OP  */
-#line 161 "bison.y"
+#line 162 "bison.y"
                  {writeBinary((yyvsp[0].stringValue));}
-#line 2875 "bison.tab.c"
+#line 2876 "bison.tab.c"
     break;
 
   case 10: /* right_op: RIGHT_OP  */
-#line 165 "bison.y"
+#line 166 "bison.y"
                   {writeBinary((yyvsp[0].stringValue));}
-#line 2881 "bison.tab.c"
+#line 2882 "bison.tab.c"
     break;
 
   case 11: /* le_op: LE_OP  */
-#line 169 "bison.y"
+#line 170 "bison.y"
                {writeBinary((yyvsp[0].stringValue));}
-#line 2887 "bison.tab.c"
+#line 2888 "bison.tab.c"
     break;
 
   case 12: /* ge_op: GE_OP  */
-#line 173 "bison.y"
+#line 174 "bison.y"
                {writeBinary((yyvsp[0].stringValue));}
-#line 2893 "bison.tab.c"
+#line 2894 "bison.tab.c"
     break;
 
   case 13: /* eq_op: EQ_OP  */
-#line 176 "bison.y"
+#line 177 "bison.y"
                {writeBinary((yyvsp[0].stringValue));}
-#line 2899 "bison.tab.c"
+#line 2900 "bison.tab.c"
     break;
 
   case 14: /* ne_op: NE_OP  */
-#line 179 "bison.y"
+#line 180 "bison.y"
                {writeBinary((yyvsp[0].stringValue));}
-#line 2905 "bison.tab.c"
+#line 2906 "bison.tab.c"
     break;
 
   case 15: /* and_op: AND_OP  */
-#line 182 "bison.y"
+#line 183 "bison.y"
                 {writeBinary((yyvsp[0].stringValue));}
-#line 2911 "bison.tab.c"
+#line 2912 "bison.tab.c"
     break;
 
   case 16: /* or_op: OR_OP  */
-#line 185 "bison.y"
+#line 186 "bison.y"
                {writeBinary((yyvsp[0].stringValue));}
-#line 2917 "bison.tab.c"
+#line 2918 "bison.tab.c"
     break;
 
   case 17: /* mul_assign: MUL_ASSIGN  */
-#line 188 "bison.y"
+#line 189 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2923 "bison.tab.c"
+#line 2924 "bison.tab.c"
     break;
 
   case 18: /* div_assign: DIV_ASSIGN  */
-#line 191 "bison.y"
+#line 192 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2929 "bison.tab.c"
+#line 2930 "bison.tab.c"
     break;
 
   case 19: /* mod_assign: MOD_ASSIGN  */
-#line 194 "bison.y"
+#line 195 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2935 "bison.tab.c"
+#line 2936 "bison.tab.c"
     break;
 
   case 20: /* add_assign: ADD_ASSIGN  */
-#line 197 "bison.y"
+#line 198 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2941 "bison.tab.c"
+#line 2942 "bison.tab.c"
     break;
 
   case 21: /* sub_assign: SUB_ASSIGN  */
-#line 200 "bison.y"
+#line 201 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2947 "bison.tab.c"
+#line 2948 "bison.tab.c"
     break;
 
   case 22: /* left_assign: LEFT_ASSIGN  */
-#line 203 "bison.y"
+#line 204 "bison.y"
                      {writeBinary((yyvsp[0].stringValue));}
-#line 2953 "bison.tab.c"
+#line 2954 "bison.tab.c"
     break;
 
   case 23: /* right_assign: RIGHT_ASSIGN  */
-#line 206 "bison.y"
+#line 207 "bison.y"
                       {writeBinary((yyvsp[0].stringValue));}
-#line 2959 "bison.tab.c"
+#line 2960 "bison.tab.c"
     break;
 
   case 24: /* and_assign: AND_ASSIGN  */
-#line 209 "bison.y"
+#line 210 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2965 "bison.tab.c"
+#line 2966 "bison.tab.c"
     break;
 
   case 25: /* xor_assign: XOR_ASSIGN  */
-#line 212 "bison.y"
+#line 213 "bison.y"
                     {writeBinary((yyvsp[0].stringValue));}
-#line 2971 "bison.tab.c"
+#line 2972 "bison.tab.c"
     break;
 
   case 26: /* or_assign: OR_ASSIGN  */
-#line 215 "bison.y"
+#line 216 "bison.y"
                    {writeBinary((yyvsp[0].stringValue));}
-#line 2977 "bison.tab.c"
+#line 2978 "bison.tab.c"
     break;
 
   case 27: /* minus: MINUS  */
-#line 219 "bison.y"
+#line 220 "bison.y"
                {writeBinary((yyvsp[0].stringValue));}
-#line 2983 "bison.tab.c"
+#line 2984 "bison.tab.c"
     break;
 
   case 28: /* plus: PLUS  */
-#line 222 "bison.y"
+#line 223 "bison.y"
               {writeBinary((yyvsp[0].stringValue));}
-#line 2989 "bison.tab.c"
+#line 2990 "bison.tab.c"
     break;
 
   case 29: /* divition: DIVITION  */
-#line 225 "bison.y"
+#line 226 "bison.y"
                  {writeBinary((yyvsp[0].stringValue));}
-#line 2995 "bison.tab.c"
+#line 2996 "bison.tab.c"
     break;
 
   case 30: /* modulus: MODULUS  */
-#line 228 "bison.y"
+#line 229 "bison.y"
                 {writeBinary((yyvsp[0].stringValue));}
-#line 3001 "bison.tab.c"
+#line 3002 "bison.tab.c"
     break;
 
   case 31: /* exponentation: EXPONENTATION  */
-#line 232 "bison.y"
+#line 233 "bison.y"
                       {writeBinary((yyvsp[0].stringValue));}
-#line 3007 "bison.tab.c"
+#line 3008 "bison.tab.c"
     break;
 
   case 32: /* ternaryif: TERNARYIF  */
-#line 236 "bison.y"
+#line 237 "bison.y"
                   {writeBinary((yyvsp[0].stringValue));}
-#line 3013 "bison.tab.c"
+#line 3014 "bison.tab.c"
     break;
 
   case 33: /* and: AND  */
-#line 240 "bison.y"
+#line 241 "bison.y"
              {writeBinary((yyvsp[0].stringValue));}
-#line 3019 "bison.tab.c"
+#line 3020 "bison.tab.c"
     break;
 
   case 34: /* leftless: LEFTLESS  */
-#line 243 "bison.y"
+#line 244 "bison.y"
                  {writeBinary((yyvsp[0].stringValue));}
-#line 3025 "bison.tab.c"
+#line 3026 "bison.tab.c"
     break;
 
   case 35: /* rightmore: RIGHTMORE  */
-#line 246 "bison.y"
+#line 247 "bison.y"
                   {writeBinary((yyvsp[0].stringValue));}
-#line 3031 "bison.tab.c"
+#line 3032 "bison.tab.c"
     break;
 
   case 36: /* or: OR  */
-#line 249 "bison.y"
+#line 250 "bison.y"
            {writeBinary((yyvsp[0].stringValue));}
-#line 3037 "bison.tab.c"
+#line 3038 "bison.tab.c"
     break;
 
   case 37: /* asterisk: ASTERISK  */
-#line 255 "bison.y"
+#line 256 "bison.y"
                   {writeUnary((yyvsp[0].stringValue));}
-#line 3043 "bison.tab.c"
+#line 3044 "bison.tab.c"
     break;
 
   case 38: /* inc_op: INC_OP  */
-#line 258 "bison.y"
+#line 259 "bison.y"
                 {writeUnary((yyvsp[0].stringValue));}
-#line 3049 "bison.tab.c"
+#line 3050 "bison.tab.c"
     break;
 
   case 39: /* dec_op: DEC_OP  */
-#line 262 "bison.y"
+#line 263 "bison.y"
                {writeUnary((yyvsp[0].stringValue));}
-#line 3055 "bison.tab.c"
+#line 3056 "bison.tab.c"
     break;
 
   case 40: /* exclamation: EXCLAMATION  */
-#line 266 "bison.y"
+#line 267 "bison.y"
                      {writeUnary((yyvsp[0].stringValue));}
-#line 3061 "bison.tab.c"
+#line 3062 "bison.tab.c"
     break;
 
   case 41: /* not: NOT  */
-#line 269 "bison.y"
+#line 270 "bison.y"
              {writeUnary((yyvsp[0].stringValue));}
-#line 3067 "bison.tab.c"
+#line 3068 "bison.tab.c"
     break;
 
   case 42: /* typedef_name: TYPEDEF_NAME  */
-#line 273 "bison.y"
+#line 274 "bison.y"
                       {writeUnary((yyvsp[0].stringValue));}
-#line 3073 "bison.tab.c"
+#line 3074 "bison.tab.c"
     break;
 
   case 43: /* typedef: TYPEDEF  */
-#line 276 "bison.y"
+#line 277 "bison.y"
                  {write((yyvsp[0].stringValue));write(" ");}
-#line 3079 "bison.tab.c"
+#line 3080 "bison.tab.c"
     break;
 
   case 44: /* alignas: ALIGNAS  */
-#line 279 "bison.y"
+#line 280 "bison.y"
                  {writeUnary((yyvsp[0].stringValue));}
-#line 3085 "bison.tab.c"
+#line 3086 "bison.tab.c"
     break;
 
   case 45: /* alignof: ALIGNOF  */
-#line 282 "bison.y"
+#line 283 "bison.y"
                  {writeUnary((yyvsp[0].stringValue));}
-#line 3091 "bison.tab.c"
+#line 3092 "bison.tab.c"
     break;
 
   case 46: /* sizeof: SIZEOF  */
-#line 285 "bison.y"
+#line 286 "bison.y"
                   {writeUnary((yyvsp[0].stringValue));}
-#line 3097 "bison.tab.c"
+#line 3098 "bison.tab.c"
     break;
 
   case 47: /* atomic: ATOMIC  */
-#line 288 "bison.y"
+#line 289 "bison.y"
                 {writeUnary((yyvsp[0].stringValue));}
-#line 3103 "bison.tab.c"
+#line 3104 "bison.tab.c"
     break;
 
   case 48: /* generic: GENERIC  */
-#line 291 "bison.y"
+#line 292 "bison.y"
                  {writeUnary((yyvsp[0].stringValue));}
-#line 3109 "bison.tab.c"
+#line 3110 "bison.tab.c"
     break;
 
   case 49: /* noreturn: NORETURN  */
-#line 294 "bison.y"
+#line 295 "bison.y"
                   {writeUnary((yyvsp[0].stringValue));}
-#line 3115 "bison.tab.c"
+#line 3116 "bison.tab.c"
     break;
 
   case 50: /* static_assert: STATIC_ASSERT  */
-#line 297 "bison.y"
+#line 298 "bison.y"
                        {writeUnary((yyvsp[0].stringValue));}
-#line 3121 "bison.tab.c"
+#line 3122 "bison.tab.c"
     break;
 
   case 51: /* static: STATIC  */
-#line 300 "bison.y"
+#line 301 "bison.y"
                {writeUnary((yyvsp[0].stringValue));}
-#line 3127 "bison.tab.c"
+#line 3128 "bison.tab.c"
     break;
 
   case 52: /* extern: EXTERN  */
-#line 304 "bison.y"
+#line 305 "bison.y"
                {writeUnary((yyvsp[0].stringValue));}
-#line 3133 "bison.tab.c"
+#line 3134 "bison.tab.c"
     break;
 
   case 53: /* auto: AUTO  */
-#line 308 "bison.y"
+#line 309 "bison.y"
              {write((yyvsp[0].stringValue));write(" ");}
-#line 3139 "bison.tab.c"
+#line 3140 "bison.tab.c"
     break;
 
   case 54: /* register: REGISTER  */
-#line 312 "bison.y"
+#line 313 "bison.y"
                  {write((yyvsp[0].stringValue));write(" ");}
-#line 3145 "bison.tab.c"
+#line 3146 "bison.tab.c"
     break;
 
   case 55: /* thread_local: THREAD_LOCAL  */
-#line 316 "bison.y"
+#line 317 "bison.y"
                       {writeUnary((yyvsp[0].stringValue));}
-#line 3151 "bison.tab.c"
+#line 3152 "bison.tab.c"
     break;
 
   case 56: /* break: BREAK  */
-#line 319 "bison.y"
+#line 320 "bison.y"
                {writeUnary((yyvsp[0].stringValue));}
-#line 3157 "bison.tab.c"
+#line 3158 "bison.tab.c"
     break;
 
   case 57: /* const: CONST  */
-#line 322 "bison.y"
+#line 323 "bison.y"
                {write((yyvsp[0].stringValue));write(" ");}
-#line 3163 "bison.tab.c"
+#line 3164 "bison.tab.c"
     break;
 
   case 58: /* restrict: RESTRICT  */
-#line 325 "bison.y"
+#line 326 "bison.y"
                   {writeUnary((yyvsp[0].stringValue));}
-#line 3169 "bison.tab.c"
+#line 3170 "bison.tab.c"
     break;
 
   case 59: /* volatile: VOLATILE  */
-#line 328 "bison.y"
+#line 329 "bison.y"
                  {writeUnary((yyvsp[0].stringValue));}
-#line 3175 "bison.tab.c"
+#line 3176 "bison.tab.c"
     break;
 
   case 60: /* inline: INLINE  */
-#line 331 "bison.y"
+#line 332 "bison.y"
                {writeUnary((yyvsp[0].stringValue));}
-#line 3181 "bison.tab.c"
+#line 3182 "bison.tab.c"
     break;
 
   case 61: /* point: POINT  */
-#line 336 "bison.y"
+#line 337 "bison.y"
                {write((yyvsp[0].stringValue));}
-#line 3187 "bison.tab.c"
+#line 3188 "bison.tab.c"
     break;
 
   case 62: /* ptr_op: PTR_OP  */
-#line 340 "bison.y"
+#line 341 "bison.y"
                  {write((yyvsp[0].stringValue));}
-#line 3193 "bison.tab.c"
+#line 3194 "bison.tab.c"
     break;
 
   case 63: /* semmicolon: SEMMICOLON  */
-#line 345 "bison.y"
+#line 346 "bison.y"
                     {write((yyvsp[0].stringValue));}
-#line 3199 "bison.tab.c"
+#line 3200 "bison.tab.c"
     break;
 
   case 64: /* leftbracket: LEFTBRACKET  */
-#line 348 "bison.y"
+#line 349 "bison.y"
                      {write((yyvsp[0].stringValue)); openScope();}
-#line 3205 "bison.tab.c"
+#line 3206 "bison.tab.c"
     break;
 
   case 65: /* rightbracket: RIGHTBRACKET  */
-#line 351 "bison.y"
+#line 352 "bison.y"
                       {write((yyvsp[0].stringValue));  printSymTab(); closeScope();}
-#line 3211 "bison.tab.c"
+#line 3212 "bison.tab.c"
     break;
 
   case 66: /* leftparen: LEFTPAREN  */
-#line 354 "bison.y"
+#line 355 "bison.y"
                    {write((yyvsp[0].stringValue));}
-#line 3217 "bison.tab.c"
+#line 3218 "bison.tab.c"
     break;
 
   case 67: /* rightparen: RIGHTPAREN  */
-#line 357 "bison.y"
+#line 358 "bison.y"
                     {write((yyvsp[0].stringValue));}
-#line 3223 "bison.tab.c"
+#line 3224 "bison.tab.c"
     break;
 
   case 68: /* comma: COMMA  */
-#line 360 "bison.y"
+#line 361 "bison.y"
                {write((yyvsp[0].stringValue));}
-#line 3229 "bison.tab.c"
+#line 3230 "bison.tab.c"
     break;
 
   case 69: /* leftsquarebracket: LEFTSQUAREBRACKET  */
-#line 363 "bison.y"
+#line 364 "bison.y"
                            {write((yyvsp[0].stringValue));}
-#line 3235 "bison.tab.c"
+#line 3236 "bison.tab.c"
     break;
 
   case 70: /* rightsquarebracket: RIGHTSQUAREBRACKET  */
-#line 366 "bison.y"
+#line 367 "bison.y"
                             {write((yyvsp[0].stringValue));}
-#line 3241 "bison.tab.c"
+#line 3242 "bison.tab.c"
     break;
 
   case 71: /* ellipsis: ELLIPSIS  */
-#line 369 "bison.y"
+#line 370 "bison.y"
                   {write((yyvsp[0].stringValue));}
-#line 3247 "bison.tab.c"
+#line 3248 "bison.tab.c"
     break;
 
   case 72: /* bool: BOOL  */
-#line 373 "bison.y"
+#line 374 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3253 "bison.tab.c"
+#line 3254 "bison.tab.c"
     break;
 
   case 73: /* char: CHAR  */
-#line 376 "bison.y"
+#line 377 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3259 "bison.tab.c"
+#line 3260 "bison.tab.c"
     break;
 
   case 74: /* short: SHORT  */
-#line 379 "bison.y"
+#line 380 "bison.y"
               {writeTypes((yyvsp[0].stringValue));}
-#line 3265 "bison.tab.c"
+#line 3266 "bison.tab.c"
     break;
 
   case 75: /* int: INT  */
-#line 382 "bison.y"
+#line 383 "bison.y"
             {writeTypes((yyvsp[0].stringValue));}
-#line 3271 "bison.tab.c"
+#line 3272 "bison.tab.c"
     break;
 
   case 76: /* long: LONG  */
-#line 385 "bison.y"
+#line 386 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3277 "bison.tab.c"
+#line 3278 "bison.tab.c"
     break;
 
   case 77: /* signed: SIGNED  */
-#line 388 "bison.y"
+#line 389 "bison.y"
                {writeTypes((yyvsp[0].stringValue));}
-#line 3283 "bison.tab.c"
+#line 3284 "bison.tab.c"
     break;
 
   case 78: /* unsigned: UNSIGNED  */
-#line 391 "bison.y"
+#line 392 "bison.y"
                  {writeTypes((yyvsp[0].stringValue));}
-#line 3289 "bison.tab.c"
+#line 3290 "bison.tab.c"
     break;
 
   case 79: /* float: FLOAT  */
-#line 394 "bison.y"
+#line 395 "bison.y"
               {writeTypes((yyvsp[0].stringValue));}
-#line 3295 "bison.tab.c"
+#line 3296 "bison.tab.c"
     break;
 
   case 80: /* double: DOUBLE  */
-#line 397 "bison.y"
+#line 398 "bison.y"
                {writeTypes((yyvsp[0].stringValue));}
-#line 3301 "bison.tab.c"
+#line 3302 "bison.tab.c"
     break;
 
   case 81: /* void: VOID  */
-#line 400 "bison.y"
+#line 401 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3307 "bison.tab.c"
+#line 3308 "bison.tab.c"
     break;
 
   case 82: /* complex: COMPLEX  */
-#line 403 "bison.y"
+#line 404 "bison.y"
                 {writeTypes((yyvsp[0].stringValue));}
-#line 3313 "bison.tab.c"
+#line 3314 "bison.tab.c"
     break;
 
   case 83: /* imaginary: IMAGINARY  */
-#line 406 "bison.y"
+#line 407 "bison.y"
                   {writeTypes((yyvsp[0].stringValue));}
-#line 3319 "bison.tab.c"
+#line 3320 "bison.tab.c"
     break;
 
   case 84: /* struct: STRUCT  */
-#line 409 "bison.y"
+#line 410 "bison.y"
                {writeTypes((yyvsp[0].stringValue));}
-#line 3325 "bison.tab.c"
+#line 3326 "bison.tab.c"
     break;
 
   case 85: /* union: UNION  */
-#line 412 "bison.y"
+#line 413 "bison.y"
               {writeTypes((yyvsp[0].stringValue));}
-#line 3331 "bison.tab.c"
+#line 3332 "bison.tab.c"
     break;
 
   case 86: /* enum: ENUM  */
-#line 415 "bison.y"
+#line 416 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3337 "bison.tab.c"
+#line 3338 "bison.tab.c"
     break;
 
   case 87: /* case: CASE  */
-#line 418 "bison.y"
+#line 419 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3343 "bison.tab.c"
+#line 3344 "bison.tab.c"
     break;
 
   case 88: /* default: DEFAULT  */
-#line 421 "bison.y"
+#line 422 "bison.y"
                 {writeTypes((yyvsp[0].stringValue));}
-#line 3349 "bison.tab.c"
+#line 3350 "bison.tab.c"
     break;
 
   case 89: /* continue: CONTINUE  */
-#line 424 "bison.y"
+#line 425 "bison.y"
                  {writeTypes((yyvsp[0].stringValue));}
-#line 3355 "bison.tab.c"
+#line 3356 "bison.tab.c"
     break;
 
   case 90: /* goto: GOTO  */
-#line 427 "bison.y"
+#line 428 "bison.y"
              {writeTypes((yyvsp[0].stringValue));}
-#line 3361 "bison.tab.c"
+#line 3362 "bison.tab.c"
     break;
 
   case 91: /* return: RETURN  */
-#line 430 "bison.y"
+#line 431 "bison.y"
                 {writeTypes((yyvsp[0].stringValue));}
-#line 3367 "bison.tab.c"
+#line 3368 "bison.tab.c"
     break;
 
   case 92: /* if: IF  */
-#line 435 "bison.y"
+#line 436 "bison.y"
             {writeIteration((yyvsp[0].stringValue));}
-#line 3373 "bison.tab.c"
+#line 3374 "bison.tab.c"
     break;
 
   case 93: /* else: ELSE  */
-#line 438 "bison.y"
+#line 439 "bison.y"
               {writeIteration((yyvsp[0].stringValue));}
-#line 3379 "bison.tab.c"
+#line 3380 "bison.tab.c"
     break;
 
   case 94: /* switch: SWITCH  */
-#line 441 "bison.y"
+#line 442 "bison.y"
                 {writeIteration((yyvsp[0].stringValue));}
-#line 3385 "bison.tab.c"
+#line 3386 "bison.tab.c"
     break;
 
   case 95: /* while: WHILE  */
-#line 444 "bison.y"
+#line 445 "bison.y"
                {writeIteration((yyvsp[0].stringValue));}
-#line 3391 "bison.tab.c"
+#line 3392 "bison.tab.c"
     break;
 
   case 96: /* do: DO  */
-#line 447 "bison.y"
+#line 448 "bison.y"
             {writeIteration((yyvsp[0].stringValue));}
-#line 3397 "bison.tab.c"
+#line 3398 "bison.tab.c"
     break;
 
   case 97: /* for: FOR  */
-#line 450 "bison.y"
+#line 451 "bison.y"
              {writeIteration((yyvsp[0].stringValue));forFlag=1;}
-#line 3403 "bison.tab.c"
+#line 3404 "bison.tab.c"
     break;
 
   case 98: /* prepareIdInsertion: %empty  */
-#line 454 "bison.y"
+#line 455 "bison.y"
                 {isDeclaration = 1;}
-#line 3409 "bison.tab.c"
+#line 3410 "bison.tab.c"
     break;
 
   case 104: /* primary_expression: leftparen error rightparen  */
-#line 463 "bison.y"
+#line 464 "bison.y"
                                      {yyerrok;}
-#line 3415 "bison.tab.c"
+#line 3416 "bison.tab.c"
     break;
 
   case 105: /* primary_expression: leftparen error semmicolon  */
-#line 464 "bison.y"
+#line 465 "bison.y"
                                      {yyerrok;}
-#line 3421 "bison.tab.c"
+#line 3422 "bison.tab.c"
     break;
 
   case 106: /* primary_expression: leftparen error rightbracket  */
-#line 465 "bison.y"
+#line 466 "bison.y"
                                        {yyerrok;}
-#line 3427 "bison.tab.c"
+#line 3428 "bison.tab.c"
     break;
 
   case 110: /* enumeration_constant_two: ENUMERATION_CONSTANT  */
-#line 475 "bison.y"
+#line 476 "bison.y"
                              {write((yyvsp[0].stringValue));}
-#line 3433 "bison.tab.c"
+#line 3434 "bison.tab.c"
     break;
 
   case 115: /* generic_selection: generic leftparen assignment_expression comma error rightparen  */
-#line 489 "bison.y"
+#line 490 "bison.y"
                                                                          {yyerrok;}
-#line 3439 "bison.tab.c"
+#line 3440 "bison.tab.c"
     break;
 
   case 118: /* generic_assoc_list: generic_assoc_list error generic_association  */
-#line 495 "bison.y"
+#line 496 "bison.y"
                                                       { yyerrok;}
-#line 3445 "bison.tab.c"
+#line 3446 "bison.tab.c"
     break;
 
   case 131: /* postfix_expression: postfix_expression leftsquarebracket error rightsquarebracket  */
-#line 514 "bison.y"
+#line 515 "bison.y"
                                                                         {yyerrok;}
-#line 3451 "bison.tab.c"
+#line 3452 "bison.tab.c"
     break;
 
   case 132: /* postfix_expression: postfix_expression leftparen error rightparen  */
-#line 515 "bison.y"
+#line 516 "bison.y"
                                                         {yyerrok;}
-#line 3457 "bison.tab.c"
+#line 3458 "bison.tab.c"
     break;
 
   case 133: /* postfix_expression: postfix_expression leftparen error semmicolon  */
-#line 516 "bison.y"
+#line 517 "bison.y"
                                                         {yyerrok;}
-#line 3463 "bison.tab.c"
+#line 3464 "bison.tab.c"
     break;
 
   case 134: /* postfix_expression: postfix_expression ptr_op error semmicolon  */
-#line 517 "bison.y"
+#line 518 "bison.y"
                                                      {yyerrok;}
-#line 3469 "bison.tab.c"
+#line 3470 "bison.tab.c"
     break;
 
   case 135: /* postfix_expression: leftparen error rightparen leftbracket initializer_list rightbracket  */
-#line 518 "bison.y"
+#line 519 "bison.y"
                                                                                {yyerrok;}
-#line 3475 "bison.tab.c"
+#line 3476 "bison.tab.c"
     break;
 
   case 136: /* postfix_expression: leftparen type_name rightparen leftbracket error rightbracket  */
-#line 519 "bison.y"
+#line 520 "bison.y"
                                                                         {yyerrok;}
-#line 3481 "bison.tab.c"
+#line 3482 "bison.tab.c"
     break;
 
   case 146: /* unary_expression: alignof leftparen error rightparen  */
-#line 535 "bison.y"
+#line 536 "bison.y"
                                              {yyerrok;}
-#line 3487 "bison.tab.c"
+#line 3488 "bison.tab.c"
     break;
 
   case 187: /* assignment_expression: unary_expression assignment_operator error rightbracket  */
-#line 618 "bison.y"
+#line 619 "bison.y"
                                                                   {yyerrok;}
-#line 3493 "bison.tab.c"
+#line 3494 "bison.tab.c"
     break;
 
   case 188: /* assignment_expression: unary_expression assignment_operator error semmicolon  */
-#line 619 "bison.y"
+#line 620 "bison.y"
                                                                 {yyerrok;}
-#line 3499 "bison.tab.c"
+#line 3500 "bison.tab.c"
+    break;
+
+  case 203: /* declaration: declaration_specifiers semmicolon  */
+#line 647 "bison.y"
+                                            {end_decl();}
+#line 3506 "bison.tab.c"
+    break;
+
+  case 204: /* declaration: declaration_specifiers init_declarator_list semmicolon  */
+#line 648 "bison.y"
+                                                                 {end_decl();}
+#line 3512 "bison.tab.c"
     break;
 
   case 205: /* declaration: declaration_specifiers error  */
-#line 648 "bison.y"
+#line 649 "bison.y"
                                        {yyerrok;}
-#line 3505 "bison.tab.c"
+#line 3518 "bison.tab.c"
     break;
 
   case 206: /* declaration: declaration_specifiers init_declarator_list error  */
-#line 649 "bison.y"
+#line 650 "bison.y"
                                                             {yyerrok;}
-#line 3511 "bison.tab.c"
+#line 3524 "bison.tab.c"
     break;
 
   case 228: /* type_specifier: void  */
-#line 686 "bison.y"
+#line 687 "bison.y"
                {push(createData("type","void"));}
-#line 3517 "bison.tab.c"
+#line 3530 "bison.tab.c"
     break;
 
   case 229: /* type_specifier: char  */
-#line 687 "bison.y"
+#line 688 "bison.y"
                {push(createData("type","char"));}
-#line 3523 "bison.tab.c"
+#line 3536 "bison.tab.c"
     break;
 
   case 230: /* type_specifier: short  */
-#line 688 "bison.y"
+#line 689 "bison.y"
                 {push(createData("type","short"));}
-#line 3529 "bison.tab.c"
+#line 3542 "bison.tab.c"
     break;
 
   case 231: /* type_specifier: int  */
-#line 689 "bison.y"
+#line 690 "bison.y"
                {push(createData("type","int"));}
-#line 3535 "bison.tab.c"
+#line 3548 "bison.tab.c"
     break;
 
   case 232: /* type_specifier: long  */
-#line 690 "bison.y"
+#line 691 "bison.y"
                {push(createData("type","long"));}
-#line 3541 "bison.tab.c"
+#line 3554 "bison.tab.c"
     break;
 
   case 233: /* type_specifier: float  */
-#line 691 "bison.y"
+#line 692 "bison.y"
                 {push(createData("type","float"));}
-#line 3547 "bison.tab.c"
+#line 3560 "bison.tab.c"
     break;
 
   case 234: /* type_specifier: double  */
-#line 692 "bison.y"
+#line 693 "bison.y"
                  {push(createData("type","double"));}
-#line 3553 "bison.tab.c"
+#line 3566 "bison.tab.c"
     break;
 
   case 235: /* type_specifier: signed  */
-#line 693 "bison.y"
+#line 694 "bison.y"
                   {push(createData("type","signed"));}
-#line 3559 "bison.tab.c"
+#line 3572 "bison.tab.c"
     break;
 
   case 236: /* type_specifier: unsigned  */
-#line 694 "bison.y"
+#line 695 "bison.y"
                     {push(createData("type","unsigned"));}
-#line 3565 "bison.tab.c"
+#line 3578 "bison.tab.c"
     break;
 
   case 237: /* type_specifier: bool  */
-#line 695 "bison.y"
+#line 696 "bison.y"
                {push(createData("type","bool"));}
-#line 3571 "bison.tab.c"
+#line 3584 "bison.tab.c"
     break;
 
   case 238: /* type_specifier: complex  */
-#line 696 "bison.y"
+#line 697 "bison.y"
                    {push(createData("type","complex"));}
-#line 3577 "bison.tab.c"
+#line 3590 "bison.tab.c"
     break;
 
   case 239: /* type_specifier: imaginary  */
-#line 697 "bison.y"
+#line 698 "bison.y"
                         {push(createData("type","imaginary"));}
-#line 3583 "bison.tab.c"
+#line 3596 "bison.tab.c"
     break;
 
   case 247: /* struct_or_union_specifier: struct_or_union error rightbracket  */
-#line 708 "bison.y"
+#line 709 "bison.y"
                                              {yyerrok;}
-#line 3589 "bison.tab.c"
+#line 3602 "bison.tab.c"
     break;
 
   case 248: /* struct_or_union_specifier: struct_or_union error identifier rightbracket  */
-#line 709 "bison.y"
+#line 710 "bison.y"
                                                         {yyerrok;}
-#line 3595 "bison.tab.c"
+#line 3608 "bison.tab.c"
     break;
 
   case 249: /* struct_or_union: struct  */
-#line 713 "bison.y"
+#line 714 "bison.y"
                   {push(createData("type","struct"));}
-#line 3601 "bison.tab.c"
+#line 3614 "bison.tab.c"
     break;
 
   case 250: /* struct_or_union: union  */
-#line 714 "bison.y"
+#line 715 "bison.y"
                  {push(createData("type","union"));}
-#line 3607 "bison.tab.c"
+#line 3620 "bison.tab.c"
     break;
 
   case 253: /* struct_declaration_list: struct_declaration_list error struct_declaration  */
-#line 720 "bison.y"
+#line 721 "bison.y"
                                                            {yyerrok;}
-#line 3613 "bison.tab.c"
+#line 3626 "bison.tab.c"
     break;
 
   case 273: /* enumerator_list: enumerator_list error enumerator  */
-#line 758 "bison.y"
+#line 759 "bison.y"
                                            {yyerrok;}
-#line 3619 "bison.tab.c"
+#line 3632 "bison.tab.c"
     break;
 
   case 277: /* atomic_type_specifier: atomic leftparen error rightparen  */
-#line 768 "bison.y"
+#line 769 "bison.y"
                                             {yyerrok;}
-#line 3625 "bison.tab.c"
+#line 3638 "bison.tab.c"
     break;
 
   case 286: /* alignment_specifier: alignas leftparen error rightparen  */
-#line 786 "bison.y"
+#line 787 "bison.y"
                                              {yyerrok;}
-#line 3631 "bison.tab.c"
+#line 3644 "bison.tab.c"
     break;
 
   case 303: /* direct_declarator: direct_declarator leftparen error rightparen  */
-#line 809 "bison.y"
+#line 810 "bison.y"
                                                        {yyerrok;}
-#line 3637 "bison.tab.c"
+#line 3650 "bison.tab.c"
     break;
 
   case 304: /* direct_declarator: leftparen error rightparen  */
-#line 810 "bison.y"
+#line 811 "bison.y"
                                      {yyerrok;}
-#line 3643 "bison.tab.c"
+#line 3656 "bison.tab.c"
     break;
 
   case 313: /* parameter_type_list: parameter_list error ellipsis  */
-#line 829 "bison.y"
+#line 830 "bison.y"
                                         {yyerrok;}
-#line 3649 "bison.tab.c"
+#line 3662 "bison.tab.c"
+    break;
+
+  case 314: /* parameter_list: parameter_declaration  */
+#line 834 "bison.y"
+                                {end_decl();}
+#line 3668 "bison.tab.c"
+    break;
+
+  case 315: /* parameter_list: parameter_list comma parameter_declaration  */
+#line 835 "bison.y"
+                                                     {end_decl();}
+#line 3674 "bison.tab.c"
     break;
 
   case 316: /* parameter_list: parameter_list error parameter_declaration  */
-#line 835 "bison.y"
+#line 836 "bison.y"
                                                      {yyerrok;}
-#line 3655 "bison.tab.c"
+#line 3680 "bison.tab.c"
     break;
 
   case 322: /* identifier_list: identifier_list error identifier  */
-#line 847 "bison.y"
+#line 848 "bison.y"
                                            {yyerrok;}
-#line 3661 "bison.tab.c"
+#line 3686 "bison.tab.c"
     break;
 
   case 325: /* type_name: specifier_qualifier_list error abstract_declarator  */
-#line 853 "bison.y"
+#line 854 "bison.y"
                                                              {yyerrok;}
-#line 3667 "bison.tab.c"
+#line 3692 "bison.tab.c"
     break;
 
   case 350: /* direct_abstract_declarator: direct_abstract_declarator leftparen error rightparen  */
-#line 884 "bison.y"
+#line 885 "bison.y"
                                                                 {yyerrok;}
-#line 3673 "bison.tab.c"
+#line 3698 "bison.tab.c"
     break;
 
   case 358: /* initializer_list: initializer_list error initializer  */
-#line 898 "bison.y"
+#line 899 "bison.y"
                                              {yyerrok;}
-#line 3679 "bison.tab.c"
+#line 3704 "bison.tab.c"
     break;
 
   case 362: /* designator_list: designator_list error designator  */
-#line 908 "bison.y"
+#line 909 "bison.y"
                                            {yyerrok;}
-#line 3685 "bison.tab.c"
+#line 3710 "bison.tab.c"
     break;
 
   case 379: /* block_item_list: block_item_list error block_item  */
-#line 943 "bison.y"
+#line 944 "bison.y"
                                            {yyerrok;}
-#line 3691 "bison.tab.c"
+#line 3716 "bison.tab.c"
     break;
 
   case 384: /* expression_statement: expression error semmicolon  */
-#line 954 "bison.y"
+#line 955 "bison.y"
                                       {yyerrok;}
-#line 3697 "bison.tab.c"
+#line 3722 "bison.tab.c"
     break;
 
   case 388: /* selection_statement: if leftparen error rightparen statement  */
-#line 961 "bison.y"
+#line 962 "bison.y"
                                                   {yyerrok;}
-#line 3703 "bison.tab.c"
+#line 3728 "bison.tab.c"
     break;
 
   case 389: /* selection_statement: if leftparen error rightparen statement else statement  */
-#line 962 "bison.y"
+#line 963 "bison.y"
                                                                  {yyerrok;}
-#line 3709 "bison.tab.c"
+#line 3734 "bison.tab.c"
     break;
 
   case 390: /* selection_statement: switch leftparen error rightparen  */
-#line 963 "bison.y"
+#line 964 "bison.y"
                                             {yyerrok;}
-#line 3715 "bison.tab.c"
+#line 3740 "bison.tab.c"
     break;
 
   case 397: /* iteration_statement: for leftparen error rightparen statement rightbracket  */
-#line 973 "bison.y"
+#line 974 "bison.y"
                                                                 {yyerrok;}
-#line 3721 "bison.tab.c"
+#line 3746 "bison.tab.c"
     break;
 
   case 398: /* iteration_statement: while leftparen error rightparen  */
-#line 974 "bison.y"
+#line 975 "bison.y"
                                            {yyerrok;}
-#line 3727 "bison.tab.c"
+#line 3752 "bison.tab.c"
     break;
 
   case 404: /* jump_statement: return error rightbracket  */
-#line 983 "bison.y"
+#line 984 "bison.y"
                                     {yyerrok;}
-#line 3733 "bison.tab.c"
+#line 3758 "bison.tab.c"
     break;
 
   case 407: /* translation_unit: translation_unit error rightbracket  */
-#line 989 "bison.y"
+#line 990 "bison.y"
                                               {yyerrok;}
-#line 3739 "bison.tab.c"
+#line 3764 "bison.tab.c"
+    break;
+
+  case 408: /* external_declaration: function_definition  */
+#line 994 "bison.y"
+                              {end_decl();}
+#line 3770 "bison.tab.c"
     break;
 
   case 410: /* external_declaration: PREPROCESSING error external_declaration  */
-#line 995 "bison.y"
+#line 996 "bison.y"
                                                    {yyerrok;}
-#line 3745 "bison.tab.c"
+#line 3776 "bison.tab.c"
     break;
 
 
-#line 3749 "bison.tab.c"
+#line 3780 "bison.tab.c"
 
       default: break;
     }
@@ -3974,7 +4005,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 1008 "bison.y"
+#line 1009 "bison.y"
 
 
 void yyerror(const char *s)
@@ -4174,3 +4205,21 @@ void writeIteration(char* s){
 // -> spaces between binary and ternary operators
 // -> no space between increment and decrement operators
 // -> no space around . and -> operators
+
+
+void end_decl(){
+	struct Node* nodeType = retrieve("type");
+	char *type = nodeType->element->text;
+	while(strcmp(stack->top->element->objectType,"identifier")==0){
+		// THERE IS ALREADY AN ID IN THIS SCOPE WITH THIS NAME
+		if(lookupLocal(stack->top->element->text)){
+			semanticError("Identifier is already defined in present scope");
+		}else{
+			insert(stack->top->element->text);
+		}
+		pop();
+	}
+	while(strcmp(stack->top->element->objectType,"type")==0){
+		pop();
+	}
+}
