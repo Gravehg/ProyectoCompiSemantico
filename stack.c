@@ -65,3 +65,18 @@ void popElementsByType(struct Node* retrievedNode){
     printf("\n");
 }
 
+void printStack() {
+    if (stack->top == NULL) {
+        printf("The semantic stack is empty.\n");
+        return;
+    }
+
+    struct Node* currentNode = stack->top;
+    printf("Semantic Stack:\n");
+    while (currentNode != NULL) {
+        printf("Object Type: %s, Text: %s\n", currentNode->element->objectType, currentNode->element->text);
+        currentNode = currentNode->next;
+    }
+    printf("Stack Size: %d\n", stack->size);
+    printf("\n");
+}
