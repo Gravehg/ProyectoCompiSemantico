@@ -20,6 +20,7 @@ void printSymTab();
 void openScope();
 void closeScope();
 int lookup(char *id);
+int lookupLocal(char *id);
 
 extern struct SymbolTable *sym;
 
