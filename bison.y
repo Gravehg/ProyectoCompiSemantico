@@ -128,6 +128,7 @@
 
 identifier: 
 		  IDENTIFIER {write($1);
+		  			 
 		  			 if(!isDeclaration){
 						checkInTable($1);
 					 }else{	
@@ -417,7 +418,7 @@ union:
 	UNION {writeTypes($1);}
 	;
 enum:
-	ENUM {writeTypes($1);}
+	ENUM {writeTypes($1); push(createData("type",$1));}
 	;
 case:
 	CASE {writeTypes($1);}
@@ -708,8 +709,8 @@ type_specifier
 
 struct_or_union_specifier
 	: struct_or_union leftbracket struct_declaration_list rightbracket
-	| struct_or_union prepareIdInsertion identifier {insertStructDef();} leftbracket struct_declaration_list rightbracket
-	| struct_or_union prepareIdInsertion identifier {checkIsType();}
+	| struct_or_union prepareIdInsertion identifier leftbracket struct_declaration_list rightbracket
+	| struct_or_union prepareIdInsertion identifier 
 	| struct_or_union error rightbracket {yyerrok;}
 	| struct_or_union error identifier rightbracket {yyerrok;}
 	;
@@ -727,8 +728,8 @@ struct_declaration_list
 	;
 
 struct_declaration
-	: specifier_qualifier_list semmicolon  	/* for anonymous struct/union */
-	| specifier_qualifier_list struct_declarator_list semmicolon 
+	: specifier_qualifier_list semmicolon {end_decl();} 	/* for anonymous struct/union */
+	| specifier_qualifier_list struct_declarator_list semmicolon {end_decl();}
 	| static_assert_declaration 
 	;
 
@@ -920,7 +921,7 @@ designator
 	;
 
 static_assert_declaration
-	: static_assert leftparen constant_expression comma string_literal rightparen semmicolon
+	: static_assert leftparen constant_expression comma string_literal rightparen semmicolon {end_decl();}
 	;
 
 statement
@@ -1225,6 +1226,8 @@ void end_decl(){
 		}
 		pop();
 	}
+
+	
 	while(strcmp(stack->top->element->objectType,"type")==0){
 		pop();
 	}

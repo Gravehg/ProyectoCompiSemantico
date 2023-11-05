@@ -1,491 +1,491 @@
 struct PriorityQueueNode{
-        int data;
-        int priority;
-        struct PriorityQueueNode *next;
-        
+  int data;
+  int priority;
+  struct PriorityQueueNode*next;
+  
 }
 ;
 struct PriorityQueue{
-        struct PriorityQueueNode *front;
-        
+  struct PriorityQueueNode*front;
+  
 }
 ;
-struct PriorityQueueNode *createNode(int data, int priority){
-        struct PriorityQueueNode *newNode = (struct PriorityQueueNode *)malloc( sizeof(struct PriorityQueueNode));
-        if (newNode == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        newNode->data = data;
-        newNode->priority = priority;
-        newNode->next = NULL;
-        return newNode;
-        
+struct PriorityQueueNode*createNode(int data, int priority){
+  struct PriorityQueueNode*newNode=(struct PriorityQueueNode*)malloc(sizeof(struct PriorityQueueNode));
+  if (newNode==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  newNode->data=data;
+  newNode->priority=priority;
+  newNode->next=NULL;
+  return newNode;
+  
 }
-struct PriorityQueue *createPriorityQueue(){
-        struct PriorityQueue *pq = (struct PriorityQueue *)malloc( sizeof(struct PriorityQueue));
-        if (pq == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        pq->front = NULL;
-        return pq;
-        
+struct PriorityQueue*createPriorityQueue(){
+  struct PriorityQueue*pq=(struct PriorityQueue*)malloc(sizeof(struct PriorityQueue));
+  if (pq==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  pq->front=NULL;
+  return pq;
+  
 }
-void push(struct PriorityQueue *pq, int data, int priority){
-        struct PriorityQueueNode *newNode = createNode(data, priority);
-        if (pq->front == NULL || priority < pq->front->priority){
-                newNode->next = pq->front;
-                pq->front = newNode;
-                
-        }
-        else {
-                struct PriorityQueueNode *current = pq->front;
-                while (current->next != NULL && current->next->priority <= priority){
-                        current = current->next;
-                        
-                }
-                newNode->next = current->next;
-                current->next = newNode;
-                
-        }
-        
+void push(struct PriorityQueue*pq, int data, int priority){
+  struct PriorityQueueNode*newNode=createNode(data, priority);
+  if (pq->front==NULL||priority<pq->front->priority){
+      newNode->next=pq->front;
+      pq->front=newNode;
+      
+  }
+  else {
+      struct PriorityQueueNode*current=pq->front;
+      while (current->next!=NULL&&current->next->priority<=priority){
+            current=current->next;
+            
+      }
+      newNode->next=current->next;
+      current->next=newNode;
+      
+  }
+  
 }
-void pop(struct PriorityQueue *pq){
-        if (pq->front != NULL){
-                struct PriorityQueueNode *temp = pq->front;
-                pq->front = pq->front->next;
-                free(temp);
-                
-        }
-        
+void pop(struct PriorityQueue*pq){
+  if (pq->front!=NULL){
+      struct PriorityQueueNode*temp=pq->front;
+      pq->front=pq->front->next;
+      free(temp);
+      
+  }
+  
 }
-int top(struct PriorityQueue *pq){
-        if (pq->front != NULL){
-                return pq->front->data;
-                
-        }
-        return  - 1;
-        
+int top(struct PriorityQueue*pq){
+  if (pq->front!=NULL){
+      return pq->front->data;
+      
+  }
+  return -1;
+  
 }
-int is_empty(struct PriorityQueue *pq){
-        return pq->front == NULL;
-        
+int is_empty(struct PriorityQueue*pq){
+  return pq->front==NULL;
+  
 }
-void printPriorityQueue(struct PriorityQueue *pq){
-        struct PriorityQueueNode *current = pq->front;
-        while (current != NULL){
-                printf("(%d, %d) ", current->data, current->priority);
-                current = current->next;
-                
-        }
-        printf("\n");
-        
+void printPriorityQueue(struct PriorityQueue*pq){
+  struct PriorityQueueNode*current=pq->front;
+  while (current!=NULL){
+      printf("(%d, %d) ", current->data, current->priority);
+      current=current->next;
+      
+  }
+  printf("\n");
+  
 }
 int main(){
-        struct PriorityQueue *pq = createPriorityQueue();
-        push(pq, 42, 2);
-        push(pq, 13, 1);
-        push(pq, 8, 3);
-        push(pq, 55, 2);
-        printf("Priority Queue: ");
-        printPriorityQueue(pq);
-        while ( !is_empty(pq)){
-                printf("Top element: %d\n", top(pq));
-                pop(pq);
-                
-        }
-        return 0;
-        
+  struct PriorityQueue*pq=createPriorityQueue();
+  push(pq, 42, 2);
+  push(pq, 13, 1);
+  push(pq, 8, 3);
+  push(pq, 55, 2);
+  printf("Priority Queue: ");
+  printPriorityQueue(pq);
+  while (!is_empty(pq)){
+      printf("Top element: %d\n", top(pq));
+      pop(pq);
+      
+  }
+  return 0;
+  
 }
 int testingComplex(){
-        _Complex double complexVar1 = 3.0 + 2.0 *_Complex_I;
-        _Complex double complexVar2 = 1.0 - 2.0 *_Complex_I;
-        _Complex double result = complexVar1 *complexVar2 + 2.0 *_Complex_I;
-        _Bool isPositiveReal = 12;
-        printf("Result: %lf + %lfi\n", result, result);
-        printf("Is the real part positive? %s\n", isPositiveReal ? "Yes"  : "No");
-        return 0;
-        
+  _Complex double complexVar1=3.0+2.0*_Complex_I;
+  _Complex double complexVar2=1.0-2.0*_Complex_I;
+  _Complex double result=complexVar1*complexVar2+2.0*_Complex_I;
+  _Bool isPositiveReal=12;
+  printf("Result: %lf + %lfi\n", result, result);
+  printf("Is the real part positive? %s\n", isPositiveReal?"Yes" :"No");
+  return 0;
+  
 }
 struct HeapNode{
-        int data;
-        
+  int data;
+  
 }
 ;
 struct MinHeap{
-        struct HeapNode * *array;
-        int capacity;
-        int size;
-        
+  struct HeapNode**array;
+  int capacity;
+  int size;
+  
 }
 ;
-struct MinHeap *createMinHeap(int capacity){
-        struct MinHeap *minHeap = (struct MinHeap *)malloc( sizeof(struct MinHeap));
-        if (minHeap == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        minHeap->capacity = capacity;
-        minHeap->size = 0;
-        minHeap->array = (struct HeapNode * *)malloc(capacity * sizeof(struct HeapNode *));
-        if (minHeap->array == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        return minHeap;
-        
+struct MinHeap*createMinHeap(int capacity){
+  struct MinHeap*minHeap=(struct MinHeap*)malloc(sizeof(struct MinHeap));
+  if (minHeap==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  minHeap->capacity=capacity;
+  minHeap->size=0;
+  minHeap->array=(struct HeapNode**)malloc(capacity*sizeof(struct HeapNode*));
+  if (minHeap->array==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  return minHeap;
+  
 }
-void swap(struct HeapNode * *a, struct HeapNode * *b){
-        struct HeapNode *temp =  *a;
-         *a =  *b;
-         *b = temp;
-        
+void swap(struct HeapNode**a, struct HeapNode**b){
+  struct HeapNode*temp=*a;
+  *a=*b;
+  *b=temp;
+  
 }
-void heapify(struct MinHeap *minHeap, int index){
-        int smallest = index;
-        int left = 2 *index + 1;
-        int right = 2 *index + 2;
-        if (left < minHeap->size && minHeap->array[left]->data < minHeap->array[smallest]->data)smallest = left;
-        if (right < minHeap->size && minHeap->array[right]->data < minHeap->array[smallest]->data)smallest = right;
-        if (smallest != index){
-                swap( & minHeap->array[index],  & minHeap->array[smallest]);
-                heapify(minHeap, smallest);
-                
-        }
-        
+void heapify(struct MinHeap*minHeap, int index){
+  int smallest=index;
+  int left=2*index+1;
+  int right=2*index+2;
+  if (left<minHeap->size&&minHeap->array[left]->data<minHeap->array[smallest]->data)smallest=left;
+  if (right<minHeap->size&&minHeap->array[right]->data<minHeap->array[smallest]->data)smallest=right;
+  if (smallest!=index){
+      swap(&minHeap->array[index], &minHeap->array[smallest]);
+      heapify(minHeap, smallest);
+      
+  }
+  
 }
-int is_empty(struct MinHeap *minHeap){
-        return minHeap->size == 0;
-        
+int is_empty(struct MinHeap*minHeap){
+  return minHeap->size==0;
+  
 }
-void push(struct MinHeap *minHeap, int data){
-        if (minHeap->size >= minHeap->capacity){
-                printf("Heap is full, can't insert.\n");
-                return ;
-                
-        }
-        struct HeapNode *newNode = (struct HeapNode *)malloc( sizeof(struct HeapNode));
-        if (newNode == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        newNode->data = data;
-        minHeap->size ++;
-        int i = minHeap->size - 1;
-        minHeap->array[i] = newNode;
-        while (i > 0 && minHeap->array[i]->data < minHeap->array[(i - 1) / 2]->data){
-                swap( & minHeap->array[i],  & minHeap->array[(i - 1) / 2]);
-                i = (i - 1) / 2;
-                
-        }
-        
+void push(struct MinHeap*minHeap, int data){
+  if (minHeap->size>=minHeap->capacity){
+      printf("Heap is full, can't insert.\n");
+      return ;
+      
+  }
+  struct HeapNode*newNode=(struct HeapNode*)malloc(sizeof(struct HeapNode));
+  if (newNode==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  newNode->data=data;
+  minHeap->size++;
+  int i=minHeap->size-1;
+  minHeap->array[i]=newNode;
+  while (i>0&&minHeap->array[i]->data<minHeap->array[(i-1)/2]->data){
+      swap(&minHeap->array[i], &minHeap->array[(i-1)/2]);
+      i=(i-1)/2;
+      
+  }
+  
 }
-int pop(struct MinHeap *minHeap){
-        if (is_empty(minHeap)){
-                printf("Heap is empty, can't pop.\n");
-                return  - 1;
-                
-        }
-        if (minHeap->size == 1){
-                minHeap->size --;
-                return minHeap->array[0]->data;
-                
-        }
-        int root = minHeap->array[0]->data;
-        minHeap->array[0] = minHeap->array[minHeap->size - 1];
-        minHeap->size --;
-        heapify(minHeap, 0);
-        return root;
-        
+int pop(struct MinHeap*minHeap){
+  if (is_empty(minHeap)){
+      printf("Heap is empty, can't pop.\n");
+      return -1;
+      
+  }
+  if (minHeap->size==1){
+      minHeap->size--;
+      return minHeap->array[0]->data;
+      
+  }
+  int root=minHeap->array[0]->data;
+  minHeap->array[0]=minHeap->array[minHeap->size-1];
+  minHeap->size--;
+  heapify(minHeap, 0);
+  return root;
+  
 }
-int top(struct MinHeap *minHeap){
-        if (is_empty(minHeap)){
-                printf("Heap is empty, can't get top element.\n");
-                return  - 1;
-                
-        }
-        return minHeap->array[0]->data;
-        
+int top(struct MinHeap*minHeap){
+  if (is_empty(minHeap)){
+      printf("Heap is empty, can't get top element.\n");
+      return -1;
+      
+  }
+  return minHeap->array[0]->data;
+  
 }
 int main(){
-        struct MinHeap *minHeap = createMinHeap(10);
-        push(minHeap, 4);
-        push(minHeap, 10);
-        push(minHeap, 8);
-        push(minHeap, 1);
-        printf("Top element: %d\n", top(minHeap));
-        pop(minHeap);
-        printf("Top element after pop: %d\n", top(minHeap));
-        pop(minHeap);
-        printf("Top element after another pop: %d\n", top(minHeap));
-        return 0;
-        
+  struct MinHeap*minHeap=createMinHeap(10);
+  push(minHeap, 4);
+  push(minHeap, 10);
+  push(minHeap, 8);
+  push(minHeap, 1);
+  printf("Top element: %d\n", top(minHeap));
+  pop(minHeap);
+  printf("Top element after pop: %d\n", top(minHeap));
+  pop(minHeap);
+  printf("Top element after another pop: %d\n", top(minHeap));
+  return 0;
+  
 }
- _Static_assert( sizeof(int ) == 4, "int must be 4 bytes on this platform");
- _Thread_localint threadLocalVariable;
+_Static_assert(sizeof(int )==4, "int must be 4 bytes on this platform");
+_Thread_localint threadLocalVariable;
 int testThread(){
-        threadLocalVariable = 42;
-        printf("Thread-Local Variable in Main Thread: %d\n", threadLocalVariable);
-        createNewThread();
-        return 0;
-        
+  threadLocalVariable=42;
+  printf("Thread-Local Variable in Main Thread: %d\n", threadLocalVariable);
+  createNewThread();
+  return 0;
+  
 }
 void createNewThread(){
-        printf("Thread-Local Variable in New Thread: %d\n", threadLocalVariable);
-        threadLocalVariable = 99;
-        printf("Modified Thread-Local Variable in New Thread: %d\n", threadLocalVariable);
-        
+  printf("Thread-Local Variable in New Thread: %d\n", threadLocalVariable);
+  threadLocalVariable=99;
+  printf("Modified Thread-Local Variable in New Thread: %d\n", threadLocalVariable);
+  
 }
 struct DynamicMatrix{
-        int rows;
-        int cols;
-        int  * *data;
-        
+  int rows;
+  int cols;
+  int **data;
+  
 }
 ;
-struct DynamicMatrix *createMatrix(int rows, int cols){
-        struct DynamicMatrix *matrix = (struct DynamicMatrix *)malloc( sizeof(struct DynamicMatrix));
-        if (matrix == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        matrix->rows = rows;
-        matrix->cols = cols;
-        matrix->data = (int  * *)malloc(rows * sizeof(int  *));
-        if (matrix->data == NULL){
-                printf("Memory allocation failed.\n");
-                exit(1);
-                
-        }
-        for (int i = 0;i < rows;i ++){
-                matrix->data[i] = (int  *)malloc(cols * sizeof(int ));
-                if (matrix->data[i] == NULL){
-                        printf("Memory allocation failed.\n");
-                        exit(1);
-                        
-                }
-                
-        }
-        return matrix;
-        
+struct DynamicMatrix*createMatrix(int rows, int cols){
+  struct DynamicMatrix*matrix=(struct DynamicMatrix*)malloc(sizeof(struct DynamicMatrix));
+  if (matrix==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  matrix->rows=rows;
+  matrix->cols=cols;
+  matrix->data=(int **)malloc(rows*sizeof(int *));
+  if (matrix->data==NULL){
+      printf("Memory allocation failed.\n");
+      exit(1);
+      
+  }
+  for (int i=0;i<rows;i++){
+      matrix->data[i]=(int *)malloc(cols*sizeof(int ));
+      if (matrix->data[i]==NULL){
+            printf("Memory allocation failed.\n");
+            exit(1);
+            
+      }
+      
+  }
+  return matrix;
+  
 }
-void initializeMatrix(struct DynamicMatrix *matrix, int value){
-        for (int i = 0;i < matrix->rows;i ++){
-                for (int j = 0;j < matrix->cols;j ++){
-                        matrix->data[i][j] = value;
-                        
-                }
-                
-        }
-        
+void initializeMatrix(struct DynamicMatrix*matrix, int value){
+  for (int i=0;i<matrix->rows;i++){
+      for (int j=0;j<matrix->cols;j++){
+            matrix->data[i][j]=value;
+            
+      }
+      
+  }
+  
 }
-void setMatrixValue(struct DynamicMatrix *matrix, int row, int col, int value){
-        if (row >= 0 && row < matrix->rows && col >= 0 && col < matrix->cols){
-                matrix->data[row][col] = value;
-                
-        }
-        else {
-                printf("Invalid row or column index.\n");
-                
-        }
-        
+void setMatrixValue(struct DynamicMatrix*matrix, int row, int col, int value){
+  if (row>=0&&row<matrix->rows&&col>=0&&col<matrix->cols){
+      matrix->data[row][col]=value;
+      
+  }
+  else {
+      printf("Invalid row or column index.\n");
+      
+  }
+  
 }
-int getMatrixValue(struct DynamicMatrix *matrix, int row, int col){
-        if (row >= 0 && row < matrix->rows && col >= 0 && col < matrix->cols){
-                return matrix->data[row][col];
-                
-        }
-        else {
-                printf("Invalid row or column index.\n");
-                return  - 1;
-                
-        }
-        
+int getMatrixValue(struct DynamicMatrix*matrix, int row, int col){
+  if (row>=0&&row<matrix->rows&&col>=0&&col<matrix->cols){
+      return matrix->data[row][col];
+      
+  }
+  else {
+      printf("Invalid row or column index.\n");
+      return -1;
+      
+  }
+  
 }
-void printMatrix(struct DynamicMatrix *matrix){
-        for (int i = 0;i < matrix->rows;i ++){
-                for (int j = 0;j < matrix->cols;j ++){
-                        printf("%d\t", matrix->data[i][j]);
-                        
-                }
-                printf("\n");
-                
-        }
-        
+void printMatrix(struct DynamicMatrix*matrix){
+  for (int i=0;i<matrix->rows;i++){
+      for (int j=0;j<matrix->cols;j++){
+            printf("%d\t", matrix->data[i][j]);
+            
+      }
+      printf("\n");
+      
+  }
+  
 }
-void freeMatrix(struct DynamicMatrix *matrix){
-        for (int i = 0;i < matrix->rows;i ++){
-                free(matrix->data[i]);
-                
-        }
-        free(matrix->data);
-        free(matrix);
-        
+void freeMatrix(struct DynamicMatrix*matrix){
+  for (int i=0;i<matrix->rows;i++){
+      free(matrix->data[i]);
+      
+  }
+  free(matrix->data);
+  free(matrix);
+  
 }
 int main(){
-        struct DynamicMatrix *matrix = createMatrix(3, 4);
-        initializeMatrix(matrix, 1);
-        setMatrixValue(matrix, 0, 0, 5);
-        setMatrixValue(matrix, 1, 2, 8);
-        printf("Matrix Contents:\n");
-        printMatrix(matrix);
-        int value = getMatrixValue(matrix, 1, 2);
-        if (value !=  - 1){
-                printf("Value at (1, 2): %d\n", value);
-                
-        }
-        freeMatrix(matrix);
-        return 0;
-        
+  struct DynamicMatrix*matrix=createMatrix(3, 4);
+  initializeMatrix(matrix, 1);
+  setMatrixValue(matrix, 0, 0, 5);
+  setMatrixValue(matrix, 1, 2, 8);
+  printf("Matrix Contents:\n");
+  printMatrix(matrix);
+  int value=getMatrixValue(matrix, 1, 2);
+  if (value!=-1){
+      printf("Value at (1, 2): %d\n", value);
+      
+  }
+  freeMatrix(matrix);
+  return 0;
+  
 }
 int variousTypes(){
-        int integerVar = 42;
-        long longVar = 1234567890L;
-        short shortVar = 32767;
-        unsigned int unsignedVar = 100;
-        float floatVar = 3.14f;
-        double doubleVar = 2.71828;
-        long double longDoubleVar = 1.4142135623730951L;
-        char charVar = 'A';
-        int intArray[5] = {
-                1, 2, 3, 4, 5
-        }
-        ;
-        double doubleArray[] = {
-                1.1, 2.2, 3.3, 4.4
-        }
-        ;
-        char string[] = "Hello, C!";
-        printf("Integer: %d\n", integerVar);
-        printf("Long: %ld\n", longVar);
-        printf("Short: %hd\n", shortVar);
-        printf("Unsigned: %u\n", unsignedVar);
-        printf("Float: %f\n", floatVar);
-        printf("Double: %lf\n", doubleVar);
-        printf("Long Double: %Lf\n", longDoubleVar);
-        printf("Character: %c\n", charVar);
-        printf("Int Array: %d, %d, %d, %d, %d\n", intArray[0], intArray[1], intArray[2], intArray[3], intArray[4]);
-        printf("Double Array: %.1f, %.1f, %.1f, %.1f\n", doubleArray[0], doubleArray[1], doubleArray[2], doubleArray[3]);
-        printf("String: %s\n", string);
-        return 0;
-        
+  int integerVar=42;
+  long longVar=1234567890L;
+  short shortVar=32767;
+  unsigned int unsignedVar=100;
+  float floatVar=3.14f;
+  double doubleVar=2.71828;
+  long double longDoubleVar=1.4142135623730951L;
+  char charVar='A';
+  int intArray[5]={
+      1, 2, 3, 4, 5
+  }
+  ;
+  double doubleArray[]={
+      1.1, 2.2, 3.3, 4.4
+  }
+  ;
+  char string[]="Hello, C!";
+  printf("Integer: %d\n", integerVar);
+  printf("Long: %ld\n", longVar);
+  printf("Short: %hd\n", shortVar);
+  printf("Unsigned: %u\n", unsignedVar);
+  printf("Float: %f\n", floatVar);
+  printf("Double: %lf\n", doubleVar);
+  printf("Long Double: %Lf\n", longDoubleVar);
+  printf("Character: %c\n", charVar);
+  printf("Int Array: %d, %d, %d, %d, %d\n", intArray[0], intArray[1], intArray[2], intArray[3], intArray[4]);
+  printf("Double Array: %.1f, %.1f, %.1f, %.1f\n", doubleArray[0], doubleArray[1], doubleArray[2], doubleArray[3]);
+  printf("String: %s\n", string);
+  return 0;
+  
 }
- _Atomicint atomicInt = ATOMIC_VAR_INIT(0);
-void  *increment(void  *arg){
-        for (int i = 0;i < 10000;i ++){
-                atomic_fetch_add( & atomicInt, 1);
-                
-        }
-        return NULL;
-        
+_Atomicint atomicInt=ATOMIC_VAR_INIT(0);
+void *increment(void *arg){
+  for (int i=0;i<10000;i++){
+      atomic_fetch_add(&atomicInt, 1);
+      
+  }
+  return NULL;
+  
 }
 int testAtomic(){
-        float thread1, thread2;
-        pthread_create( & thread1, );
-        pthread_create( & thread2, NULL, increment, NULL);
-        pthread_join(thread1, NULL);
-        pthread_join(thread2, NULL);
-        printf("Atomic Integer Value: %d\n", atomic_load( & atomicInt));
-        return 0;
-        
+  float thread1, thread2;
+  pthread_create(&thread1, );
+  pthread_create(&thread2, NULL, increment, NULL);
+  pthread_join(thread1, NULL);
+  pthread_join(thread2, NULL);
+  printf("Atomic Integer Value: %d\n", atomic_load(&atomicInt));
+  return 0;
+  
 }
 struct Nodeint data;
-struct Node *prev;
-struct Node *next;
+struct Node*prev;
+struct Node*next;
 
 }
-struct Node *createNode(int data){
-struct Node *newNode = (struct Node *)malloc( sizeof(struct Node));
-if (newNode == NULL){
-        printf("Memory allocation failed.\n");
-        exit(1);
-        
+struct Node*createNode(int data){
+struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
+if (newNode==NULL){
+  printf("Memory allocation failed.\n");
+  exit(1);
+  
 }
-newNode->data = data;
-newNode->prev = NULL;
-newNode->next = NULL;
+newNode->data=data;
+newNode->prev=NULL;
+newNode->next=NULL;
 return newNode;
 
 }
-struct Node *initializeDoublyLinkedList(){
+struct Node*initializeDoublyLinkedList(){
 return NULL;
 
 }
-struct Node *append(struct Node *head, int data){
-struct Node *newNode = createNode(data);
-if (head == NULL){
-        return newNode;
-        
+struct Node*append(struct Node*head, int data){
+struct Node*newNode=createNode(data);
+if (head==NULL){
+  return newNode;
+  
 }
-struct Node *current = head;
-while (current->next != NULL){
-        current = current->next;
-        
+struct Node*current=head;
+while (current->next!=NULL){
+  current=current->next;
+  
 }
-current->next = newNode;
-newNode->prev = current;
+current->next=newNode;
+newNode->prev=current;
 return head;
 
 }
-void printDoublyLinkedList(struct Node *head){
-struct Node *current = head;
-while (current != NULL){
-        printf("%d -> ", current->data);
-        current = current->next;
-        
+void printDoublyLinkedList(struct Node*head){
+struct Node*current=head;
+while (current!=NULL){
+  printf("%d -> ", current->data);
+  current=current->next;
+  
 }
 printf("NULL\n");
 
 }
-struct Node *shiftBitsLeft(struct Node *head, int positions){
-struct Node *current = head;
-while (current != NULL){
-        current->data = current->data << positions;
-        current = current->next;
-        
+struct Node*shiftBitsLeft(struct Node*head, int positions){
+struct Node*current=head;
+while (current!=NULL){
+  current->data=current->data<<positions;
+  current=current->next;
+  
 }
 return head;
 
 }
-struct Node *shiftBitsRight(struct Node *head, int positions){
-struct Node *current = head;
-while (current != NULL){
-        current->data = current->data >> positions;
-        current = current->next;
-        
+struct Node*shiftBitsRight(struct Node*head, int positions){
+struct Node*current=head;
+while (current!=NULL){
+  current->data=current->data>>positions;
+  current=current->next;
+  
 }
 return head;
 
 }
-void freeDoublyLinkedList(struct Node *head){
-struct Node *current = head;
-while (current != NULL){
-        struct Node *temp = current;
-        current = current->next;
-        free(temp);
-        
+void freeDoublyLinkedList(struct Node*head){
+struct Node*current=head;
+while (current!=NULL){
+  struct Node*temp=current;
+  current=current->next;
+  free(temp);
+  
 }
 
 }
 int main(){
-struct Node *myList = initializeDoublyLinkedList();
-myList = append(myList);
-myList = append(myList);
-myList = append(myList, 15);
-myList = append(myList, 20);
+struct Node*myList=initializeDoublyLinkedList();
+myList=append(myList);
+myList=append(myList);
+myList=append(myList, 15);
+myList=append(myList, 20);
 printf("Original List: ");
 printDoublyLinkedList(myList);
-myList = shiftBitsLeft(myList, 2);
+myList=shiftBitsLeft(myList, 2);
 printf("After Shifting Bits Left: ");
 printDoublyLinkedList(myList);
-myList = shiftBitsRight(myList, 1);
+myList=shiftBitsRight(myList, 1);
 printf("After Shifting Bits Right: ");
 printDoublyLinkedList(myList);
 freeDoublyLinkedList(myList);

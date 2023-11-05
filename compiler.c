@@ -164,7 +164,8 @@ int main(int argc, char *argv[]) {
         printf("There has been an error\n");
         exit(1);
     }
-    printStack();
+    //printStack();
+    printSymTab();
     fclose(yyout);
     fclose(yyin);
 

@@ -1,24 +1,4 @@
-struct Estudiante{
-  int name;
-  int x;
-  
+enum Day{
+  MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }
-y;
-int main(int argc, char *argv[]){
-  int pepito;
-  struct pepito{
-      int f;
-      int g;
-      int h;
-      
-  }
-  ;
-  struct pepitopep;
-  calculate();
-  printf("%d", y.name);
-  return 0;
-  
-}
-int calculate(){
-  
-}
+;
