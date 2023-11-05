@@ -8,6 +8,7 @@ int main(int argc, char *argv[]){
     struct pepito {
         int f;
         int g;
+        int h;
     };
     struct pepito pep;
     calculate();
