@@ -3,6 +3,7 @@
 	#include <string.h>
 	#include "hashTable.h"
 	#include "stack.h"
+	#include "structDefTable.h"
 	extern int yylex();
 	extern char*yytext;
 	extern char linebuf[500];
@@ -33,7 +34,10 @@
 	void semanticError(char *s);
 	//FLAGS TO DETERMINE IF ITS A DECLARATION OR USAGE
 	int isDeclaration = 0;
+	int isStructDeclaration = 0;
 	void end_decl();
+	void insertStructDef();
+	void checkIsType();
 %}
 
 %locations
@@ -704,11 +708,12 @@ type_specifier
 
 struct_or_union_specifier
 	: struct_or_union leftbracket struct_declaration_list rightbracket
-	| struct_or_union prepareIdInsertion identifier leftbracket struct_declaration_list rightbracket
-	| struct_or_union prepareIdInsertion identifier
+	| struct_or_union prepareIdInsertion identifier {insertStructDef();} leftbracket struct_declaration_list rightbracket
+	| struct_or_union prepareIdInsertion identifier {checkIsType();}
 	| struct_or_union error rightbracket {yyerrok;}
 	| struct_or_union error identifier rightbracket {yyerrok;}
 	;
+
 
 struct_or_union
 	: struct  {push(createData("type","struct"));} 
@@ -1215,11 +1220,25 @@ void end_decl(){
 		if(lookupLocal(stack->top->element->text)){
 			semanticError("Identifier is already defined in present scope");
 		}else{
-			insert(stack->top->element->text);
+			insert(stack->top->element->text,type);
 		}
 		pop();
 	}
 	while(strcmp(stack->top->element->objectType,"type")==0){
 		pop();
+	}
+}
+
+void insertStructDef(){
+	struct Node* structRef = retrieve("identifier");
+	structRef->element->objectType = "type";
+}
+
+void checkIsType(){
+	struct Node* structRef = retrieve("identifier");
+	if(!lookup(structRef->element->text)){
+		semanticError("Cannot find declaration for type");
+	}else{
+		structRef->element->objectType = "type";
 	}
 }

@@ -161,7 +161,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 45 "bison.y"
+#line 49 "bison.y"
 
     int intValue; // Puedes cambiar int a tu tipo de dato deseado
     char* stringValue; // Puedes cambiar char* a tu tipo de dato deseado

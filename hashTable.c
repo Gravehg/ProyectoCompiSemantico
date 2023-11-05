@@ -16,7 +16,7 @@ static int hash(char *key){
     return temp;
 }
 
-void insert(char *id) {
+void insert(char *id,char *idType) {
     int h = hash(id);
     List l = sym->hashTable[h];
 
@@ -25,6 +25,7 @@ void insert(char *id) {
         l = (List)malloc(sizeof(struct node));
         l->id = id;
         l->next = NULL;
+        l->type = idType;
         sym->hashTable[h] = l;
     } else {
         if (strcmp(id, l->id) == 0) {
@@ -43,6 +44,7 @@ void insert(char *id) {
         // The id is not in the list; add it to the end.
         l->next = (List)malloc(sizeof(struct node));
         l->next->id = id;
+        l->type = idType;
         l->next->next = NULL;
     }
 }
@@ -62,6 +64,7 @@ void printSymTab(){
             List l = sym->hashTable[i];
             while(l!=NULL){
                 printf("Variable name is: %s\n",l->id);
+                printf("Variable type is: %s\n",l->type);
                 l = l->next;
             }
         }
@@ -116,5 +119,28 @@ int lookupLocal(char *id){
         if(strcmp(id,l->id) == 0) return 1;
         l = l->next;
     }
+    return 0;
+}
+
+int checkType(char *id){
+    int h = hash(id);
+    List l = sym->hashTable[h];
+    while(l != NULL){
+        if(strcmp(id,l->id) == 0) return 1;
+        l = l->next;
+    }
+
+    struct SymbolTable* currentScope = sym;
+    while (currentScope->parent != NULL) {
+        currentScope = currentScope->parent;
+        l = currentScope->hashTable[h];
+        while (l != NULL) {
+            if (strcmp(id, l->type) == 0) {
+                return 1;
+            }
+            l = l->next;
+        }
+    }
+
     return 0;
 }

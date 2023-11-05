@@ -1,6 +1,23 @@
-void excelent(int x, struct Node*node){
-  return 1;
-  int node;
-  float node;
+struct Estudiante{
+  int name;
+  int x;
+  
+}
+y;
+int main(int argc, char *argv[]){
+  int pepito;
+  struct pepito{
+      int f;
+      int g;
+      
+  }
+  ;
+  struct pepitopep;
+  calculate();
+  printf("%d", y.name);
+  return 0;
+  
+}
+int calculate(){
   
 }

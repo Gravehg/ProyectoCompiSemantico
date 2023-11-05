@@ -6,6 +6,7 @@
 
 typedef struct node {
     char *id;
+    char *type;
     struct node *next;
 } *List;
 
@@ -15,12 +16,13 @@ struct SymbolTable {
 };
 
 void initSymTab();
-void insert(char *id);
+void insert(char *id,char*idType);
 void printSymTab();
 void openScope();
 void closeScope();
 int lookup(char *id);
 int lookupLocal(char *id);
+int checkType(char*id);
 
 extern struct SymbolTable *sym;
 
