@@ -27,5 +27,4 @@ void printStack();
 
 extern struct Stack *stack;
 
-
 #endif

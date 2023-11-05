@@ -59,16 +59,33 @@ void initSymTab(){
 }
 
 void printSymTab(){
+    // + (x10)-> - + (x45)-> - +
+    printf("+----------+---------------------------------------------+\n");
+
+    int varLinesNumber = 45;
     for(int i = 0; i<SIZE; i++){
         if(sym->hashTable[i]!=NULL){
             List l = sym->hashTable[i];
             while(l!=NULL){
-                printf("Variable name is: %s\n",l->id);
-                printf("Variable type is: %s\n",l->type);
+                printf("| Var Name | %s",l->id);
+                if(strlen(l->id) < varLinesNumber){
+                    fillSpaces(varLinesNumber - (strlen(l->id) + 1)); // (+2) the beggining space and the +
+                }else{
+                    printf("\n");
+                }
                 l = l->next;
             }
         }
     }
+
+    printf("+----------+---------------------------------------------+\n\n");
+}
+
+void fillSpaces(int remaining){
+    for(int i = 0; i<remaining; i++){
+        printf(" ");
+    }
+    printf("|\n");
 }
 
 void openScope(){

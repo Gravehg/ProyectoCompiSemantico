@@ -23,6 +23,8 @@ void closeScope();
 int lookup(char *id);
 int lookupLocal(char *id);
 int checkType(char*id);
+void fillSpaces(int remaining);
+
 
 extern struct SymbolTable *sym;
 
