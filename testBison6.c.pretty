@@ -1,446 +1,443 @@
-int a=3+4;
-float b=9;
-int c=10;
 struct Stack{
-  int items[100];
-  int top;
-  
+        int items[MAX_STACK_SIZE];
+        int top;
+        
 }
 ;
-void initialize(struct Stack*stack){
-  stack->top=-1;
-  
+void initialize(struct Stack *stack){
+        stack->top =  - 1;
+        
 }
-int isEmpty(struct Stack*stack){
-  return stack->top==-1;
-  
+int isEmpty(struct Stack *stack){
+        return stack->top ==  - 1;
+        
 }
-int isFull(struct Stack*stack){
-  return stack->top==100-1;
-  
+int isFull(struct Stack *stack){
+        return stack->top == MAX_STACK_SIZE - 1;
+        
 }
-void push(struct Stack*stack, int item){
-  if (isFull(stack)){
-      printf("Stack is full. Cannot push.\n");
-      
-  }
-  else {
-      stack->items[++(stack->top)]=item;
-      
-  }
-  
+void push(struct Stack *stack, int item){
+        if (isFull(stack)){
+                printf("Stack is full. Cannot push.\n");
+                
+        }
+        else {
+                stack->items[ ++(stack->top)] = item;
+                
+        }
+        
 }
-int pop(struct Stack*stack){
-  if (isEmpty(stack)){
-      printf("Stack is empty. Cannot pop.\n");
-      return -1;
-      
-  }
-  else {
-      return stack->items[(stack->top)--];
-      
-  }
-  
+int pop(struct Stack *stack){
+        if (isEmpty(stack)){
+                printf("Stack is empty. Cannot pop.\n");
+                return  - 1;
+                
+        }
+        else {
+                return stack->items[(stack->top) --];
+                
+        }
+        
 }
-int peek(struct Stack*stack){
-  if (isEmpty(stack)){
-      printf("Stack is empty. Cannot peek.\n");
-      return -1;
-      
-  }
-  else {
-      return stack->items[stack->top];
-      
-  }
-  
+int peek(struct Stack *stack){
+        if (isEmpty(stack)){
+                printf("Stack is empty. Cannot peek.\n");
+                return  - 1;
+                
+        }
+        else {
+                return stack->items[stack->top];
+                
+        }
+        
 }
-void rotateLeft(struct Stack*stack){
-  if (!isEmpty(stack)){
-      int temp=pop(stack);
-      push(stack, temp);
-      
-  }
-  
+void rotateLeft(struct Stack *stack){
+        if ( !isEmpty(stack)){
+                int temp = pop(stack);
+                push(stack, temp);
+                
+        }
+        
 }
-void stackStack(struct Stack*destination, struct Stack*source){
-  while (!isEmpty(source)){
-      int item=pop(source);
-      push(destination, item);
-      
-  }
-  
+void stackStack(struct Stack *destination, struct Stack *source){
+        while ( !isEmpty(source)){
+                int item = pop(source);
+                push(destination, item);
+                
+        }
+        
 }
 int main(){
-  struct Stackstack1, stack2;
-  initialize(&stack1);
-  initialize(&stack2);
-  push(&stack1, 1);
-  push(&stack1, 2);
-  push(&stack1, 3);
-  printf("Stack1 Elements: ");
-  while (!isEmpty(&stack1)){
-      printf("%d ", pop(&stack1));
-      
-  }
-  printf("\n");
-  push(&stack2, 4);
-  push(&stack2, 5);
-  push(&stack2, 6);
-  rotateLeft(&stack2);
-  printf("Stack2 after Rotate Left: ");
-  while (!isEmpty(&stack2)){
-      printf("%d ", pop(&stack2));
-      
-  }
-  printf("\n");
-  stackStack(&stack1, &stack2);
-  printf("Stack1 after Stacking Stack2: ");
-  while (!isEmpty(&stack1)){
-      printf("%d ", pop(&stack1));
-      
-  }
-  printf("\n");
-  return 0;
-  
+        struct Stackstack1, stack2;
+        initialize( & stack1);
+        initialize( & stack2);
+        push( & stack1, 1);
+        push( & stack1, 2);
+        push( & stack1, 3);
+        printf("Stack1 Elements: ");
+        while ( !isEmpty( & stack1)){
+                printf("%d ", pop( & stack1));
+                
+        }
+        printf("\n");
+        push( & stack2, 4);
+        push( & stack2, 5);
+        push( & stack2, 6);
+        rotateLeft( & stack2);
+        printf("Stack2 after Rotate Left: ");
+        while ( !isEmpty( & stack2)){
+                printf("%d ", pop( & stack2));
+                
+        }
+        printf("\n");
+        stackStack( & stack1,  & stack2);
+        printf("Stack1 after Stacking Stack2: ");
+        while ( !isEmpty( & stack1)){
+                printf("%d ", pop( & stack1));
+                
+        }
+        printf("\n");
+        return 0;
+        
 }
 int testOne(){
-  int y=3+4+9+10;
-  
+        int y = A + B + C;
+        
 }
 struct AlignedStruct{
-  int x;
-  double y;
-  
+        int x;
+        double y;
+        
 }
 ;
 int main(){
-  _Alignas(32)char alignedCharArray[16];
-  printf("Size of char: %zu bytes\n", sizeof(char ));
-  printf("Size of int: %zu bytes\n", sizeof(int ));
-  printf("Size of double: %zu bytes\n", sizeof(double ));
-  printf("Size of alignedInstance: %zu bytes\n", sizeof(int ));
-  printf("Alignment of char: %zu\n", _Alignof(char ));
-  printf("Alignment of int: %zu\n", _Alignof(int ));
-  printf("Alignment of double: %zu\n", _Alignof(double ));
-  printf("Alignment of alignedInstance: %zu\n", _Alignof(int ));
-  return 0;
-  
+         _Alignas(32)char alignedCharArray[16];
+        printf("Size of char: %zu bytes\n",  sizeof(char ));
+        printf("Size of int: %zu bytes\n",  sizeof(int ));
+        printf("Size of double: %zu bytes\n",  sizeof(double ));
+        printf("Size of alignedInstance: %zu bytes\n",  sizeof(int ));
+        printf("Alignment of char: %zu\n",  _Alignof(char ));
+        printf("Alignment of int: %zu\n",  _Alignof(int ));
+        printf("Alignment of double: %zu\n",  _Alignof(double ));
+        printf("Alignment of alignedInstance: %zu\n",  _Alignof(int ));
+        return 0;
+        
 }
-void swap(int *a, int *b){
-  int temp=*a;
-  *a=*b;
-  *b=temp;
-  
+void swap(int  *a, int  *b){
+        int temp =  *a;
+         *a =  *b;
+         *b = temp;
+        
 }
 void bubbleSort(int arr[], int size){
-  for (int i=0;i<size-1;i++){
-      for (int j=0;j<size-i-1;j++){
-            if (arr[j]>arr[j+1]){
-                    swap(&arr[j], &arr[j+1]);
-                    
-            }
-            
-      }
-      
-  }
-  
+        for (int i = 0;i < size - 1;i ++){
+                for (int j = 0;j < size - i - 1;j ++){
+                        if (arr[j] > arr[j + 1]){
+                                swap( & arr[j],  & arr[j + 1]);
+                                
+                        }
+                        
+                }
+                
+        }
+        
 }
 void insertionSort(int arr[], int size){
-  int i, key, j;
-  for (i=1;i<size;i++){
-      key=arr[i];
-      j=i-1;
-      while (j>=0&&arr[j]>key){
-            arr[j+1]=arr[j];
-            j=j-1;
-            
-      }
-      arr[j+1]=key;
-      
-  }
-  
+        int i, key, j;
+        for (i = 1;i < size;i ++){
+                key = arr[i];
+                j = i - 1;
+                while (j >= 0 && arr[j] > key){
+                        arr[j + 1] = arr[j];
+                        j = j - 1;
+                        
+                }
+                arr[j + 1] = key;
+                
+        }
+        
 }
 void selectionSort(int arr[], int size){
-  int i, j, min_idx;
-  for (i=0;i<size-1;i++){
-      min_idx=i;
-      for (j=i+1;j<size;j++){
-            if (arr[j]<arr[min_idx]){
-                    min_idx=j;
-                    
-            }
-            
-      }
-      swap(&arr[min_idx], &arr[i]);
-      
-  }
-  
+        int i, j, min_idx;
+        for (i = 0;i < size - 1;i ++){
+                min_idx = i;
+                for (j = i + 1;j < size;j ++){
+                        if (arr[j] < arr[min_idx]){
+                                min_idx = j;
+                                
+                        }
+                        
+                }
+                swap( & arr[min_idx],  & arr[i]);
+                
+        }
+        
 }
 void printArray(int arr[], int size){
-  for (int i=0;i<size;i++){
-      printf("%d ", arr[i]);
-      
-  }
-  printf("\n");
-  
+        for (int i = 0;i < size;i ++){
+                printf("%d ", arr[i]);
+                
+        }
+        printf("\n");
+        
 }
 int testSorts(){
-  int arr[]={
-      64, 34, 25, 12, 22, 11, 90
-  }
-  ;
-  int size=sizeof(arr)/sizeof(arr[0]);
-  printf("Original array: ");
-  printArray(arr, size);
-  bubbleSort(arr, size);
-  printf("Sorted using Bubble Sort: ");
-  printArray(arr, size);
-  int resetArr[]={
-      64, 34, 25, 12, 22, 11, 90
-  }
-  ;
-  insertionSort(resetArr, size);
-  printf("Sorted using Insertion Sort: ");
-  printArray(resetArr, size);
-  int resetArr2[]={
-      64, 34, 25, 12, 22, 11, 90
-  }
-  ;
-  selectionSort(resetArr2, size);
-  printf("Sorted using Selection Sort: ");
-  printArray(resetArr2, size);
-  return 0;
-  
+        int arr[] = {
+                64, 34, 25, 12, 22, 11, 90
+        }
+        ;
+        int size =  sizeof(arr) /  sizeof(arr[0]);
+        printf("Original array: ");
+        printArray(arr, size);
+        bubbleSort(arr, size);
+        printf("Sorted using Bubble Sort: ");
+        printArray(arr, size);
+        int resetArr[] = {
+                64, 34, 25, 12, 22, 11, 90
+        }
+        ;
+        insertionSort(resetArr, size);
+        printf("Sorted using Insertion Sort: ");
+        printArray(resetArr, size);
+        int resetArr2[] = {
+                64, 34, 25, 12, 22, 11, 90
+        }
+        ;
+        selectionSort(resetArr2, size);
+        printf("Sorted using Selection Sort: ");
+        printArray(resetArr2, size);
+        return 0;
+        
 }
 void someFunction(){
-  printf("Inside function: %s\n", __func__);
-  
+        printf("Inside function: %s\n", __func__);
+        
 }
 int testSomeFunc(){
-  printf("Inside function: %s\n", __func__);
-  someFunction();
-  return 0;
-  
+        printf("Inside function: %s\n", __func__);
+        someFunction();
+        return 0;
+        
 }
-void exampleFunction(int *restricta, int *restrictb, int n){
-  for (int i=0;i<n;i++){
-      a[i]+=b[i];
-      
-  }
-  
+void exampleFunction(int  * restricta, int  * restrictb, int n){
+        for (int i = 0;i < n;i ++){
+                a[i] += b[i];
+                
+        }
+        
 }
 int testExFunc(){
-  int arr1[5]={
-      1, 2, 3, 4, 5
-  }
-  ;
-  int arr2[5]={
-      5, 4, 3, 2, 1
-  }
-  ;
-  exampleFunction(arr1, arr2, 5);
-  for (int i=0;i<5;i++){
-      printf("%d ", arr1[i]);
-      
-  }
-  return 0;
-  
+        int arr1[5] = {
+                1, 2, 3, 4, 5
+        }
+        ;
+        int arr2[5] = {
+                5, 4, 3, 2, 1
+        }
+        ;
+        exampleFunction(arr1, arr2, 5);
+        for (int i = 0;i < 5;i ++){
+                printf("%d ", arr1[i]);
+                
+        }
+        return 0;
+        
 }
 struct Node{
-  int key;
-  struct Node*left;
-  struct Node*right;
-  int height;
-  
+        int key;
+        struct Node *left;
+        struct Node *right;
+        int height;
+        
 }
 ;
-int getHeight(struct Node*node){
-  if (node==NULL)return 0;
-  return node->height;
-  
+int getHeight(struct Node *node){
+        if (node == NULL)return 0;
+        return node->height;
+        
 }
-void updateHeight(struct Node*node){
-  if (node!=NULL){
-      int leftHeight=getHeight(node->left);
-      int rightHeight=getHeight(node->right);
-      node->height=(leftHeight>rightHeight?leftHeight:rightHeight)+1;
-      
-  }
-  
+void updateHeight(struct Node *node){
+        if (node != NULL){
+                int leftHeight = getHeight(node->left);
+                int rightHeight = getHeight(node->right);
+                node->height = (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+                
+        }
+        
 }
-struct Node*rightRotate(struct Node*y){
-  struct Node*x=y->left;
-  struct Node*T2=x->right;
-  x->right=y;
-  y->left=T2;
-  updateHeight(y);
-  updateHeight(x);
-  return x;
-  
+struct Node *rightRotate(struct Node *y){
+        struct Node *x = y->left;
+        struct Node *T2 = x->right;
+        x->right = y;
+        y->left = T2;
+        updateHeight(y);
+        updateHeight(x);
+        return x;
+        
 }
-struct Node*leftRotate(struct Node*x){
-  struct Node*y=x->right;
-  struct Node*T2=y->left;
-  y->left=x;
-  x->right=T2;
-  updateHeight(x);
-  updateHeight(y);
-  return y;
-  
+struct Node *leftRotate(struct Node *x){
+        struct Node *y = x->right;
+        struct Node *T2 = y->left;
+        y->left = x;
+        x->right = T2;
+        updateHeight(x);
+        updateHeight(y);
+        return y;
+        
 }
-int getBalance(struct Node*node){
-  if (node==NULL)return 0;
-  return getHeight(node->left)-getHeight(node->right);
-  
+int getBalance(struct Node *node){
+        if (node == NULL)return 0;
+        return getHeight(node->left) - getHeight(node->right);
+        
 }
-struct Node*insert(struct Node*node, int key){
-  if (node==NULL)return createNode(key);
-  if (key<node->key)node->left=insert(node->left, key);
-  else if (key>node->key)node->right=insert(node->right, key);
-  else return node;
-  updateHeight(node);
-  int balance=getBalance(node);
-  if (balance>1){
-      if (key<node->left->key)return rightRotate(node);
-      else {
-            node->left=leftRotate(node->left);
-            return rightRotate(node);
-            
-      }
-      
-  }
-  if (balance<-1){
-      if (key>node->right->key)return leftRotate(node);
-      else {
-            node->right=rightRotate(node->right);
-            return leftRotate(node);
-            
-      }
-      
-  }
-  return node;
-  
+struct Node *insert(struct Node *node, int key){
+        if (node == NULL)return createNode(key);
+        if (key < node->key)node->left = insert(node->left, key);
+        else if (key > node->key)node->right = insert(node->right, key);
+        else return node;
+        updateHeight(node);
+        int balance = getBalance(node);
+        if (balance > 1){
+                if (key < node->left->key)return rightRotate(node);
+                else {
+                        node->left = leftRotate(node->left);
+                        return rightRotate(node);
+                        
+                }
+                
+        }
+        if (balance <  - 1){
+                if (key > node->right->key)return leftRotate(node);
+                else {
+                        node->right = rightRotate(node->right);
+                        return leftRotate(node);
+                        
+                }
+                
+        }
+        return node;
+        
 }
-struct Node*createNode(int key){
-  struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
-  newNode->key=key;
-  newNode->left=NULL;
-  newNode->right=NULL;
-  newNode->height=1;
-  return newNode;
-  
+struct Node *createNode(int key){
+        struct Node *newNode = (struct Node *)malloc( sizeof(struct Node));
+        newNode->key = key;
+        newNode->left = NULL;
+        newNode->right = NULL;
+        newNode->height = 1;
+        return newNode;
+        
 }
-struct Node*findMin(struct Node*node){
-  struct Node*current=node;
-  while (current->left!=NULL)current=current->left;
-  return current;
-  
+struct Node *findMin(struct Node *node){
+        struct Node *current = node;
+        while (current->left != NULL)current = current->left;
+        return current;
+        
 }
-struct Node*delete(struct Node*node, int key){
-  if (node==NULL)return node;
-  if (key<node->key)node->left=delete(node->left, key);
-  else if (key>node->key)node->right=delete(node->right, key);
-  else {
-      if ((node->left==NULL)||(node->right==NULL)){
-            struct Node*temp=node->left?node->left:node->right;
-            if (temp==NULL){
-                    temp=node;
-                    node=NULL;
-                    
-            }
-            else *node=*temp;
-            free(temp);
-            
-      }
-      else {
-            struct Node*temp=findMin(node->right);
-            node->key=temp->key;
-            node->right=delete(node->right, temp->key);
-            
-      }
-      
-  }
-  if (node==NULL)return node;
-  updateHeight(node);
-  int balance=getBalance(node);
-  if (balance>1){
-      if (getBalance(node->left)>=0)return rightRotate(node);
-      else {
-            node->left=leftRotate(node->left);
-            return rightRotate(node);
-            
-      }
-      
-  }
-  if (balance<-1){
-      if (getBalance(node->right)<=0)return leftRotate(node);
-      else {
-            node->right=rightRotate(node->right);
-            return leftRotate(node);
-            
-      }
-      
-  }
-  return node;
-  
+struct Node *delete(struct Node *node, int key){
+        if (node == NULL)return node;
+        if (key < node->key)node->left = delete(node->left, key);
+        else if (key > node->key)node->right = delete(node->right, key);
+        else {
+                if ((node->left == NULL) || (node->right == NULL)){
+                        struct Node *temp = node->left ? node->left : node->right;
+                        if (temp == NULL){
+                                temp = node;
+                                node = NULL;
+                                
+                        }
+                        else  *node =  *temp;
+                        free(temp);
+                        
+                }
+                else {
+                        struct Node *temp = findMin(node->right);
+                        node->key = temp->key;
+                        node->right = delete(node->right, temp->key);
+                        
+                }
+                
+        }
+        if (node == NULL)return node;
+        updateHeight(node);
+        int balance = getBalance(node);
+        if (balance > 1){
+                if (getBalance(node->left) >= 0)return rightRotate(node);
+                else {
+                        node->left = leftRotate(node->left);
+                        return rightRotate(node);
+                        
+                }
+                
+        }
+        if (balance <  - 1){
+                if (getBalance(node->right) <= 0)return leftRotate(node);
+                else {
+                        node->right = rightRotate(node->right);
+                        return leftRotate(node);
+                        
+                }
+                
+        }
+        return node;
+        
 }
-struct Node*invert(struct Node*root){
-  if (root==NULL)return root;
-  struct Node*temp=root->left;
-  root->left=root->right;
-  root->right=temp;
-  root->left=invert(root->left);
-  root->right=invert(root->right);
-  return root;
-  
+struct Node *invert(struct Node *root){
+        if (root == NULL)return root;
+        struct Node *temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        root->left = invert(root->left);
+        root->right = invert(root->right);
+        return root;
+        
 }
-void inOrder(struct Node*node){
-  if (node==NULL)return ;
-  inOrder(node->left);
-  printf("%d ", node->key);
-  inOrder(node->right);
-  
+void inOrder(struct Node *node){
+        if (node == NULL)return ;
+        inOrder(node->left);
+        printf("%d ", node->key);
+        inOrder(node->right);
+        
 }
-void freeTree(struct Node*node){
-  if (node==NULL)return ;
-  freeTree(node->left);
-  freeTree(node->right);
-  free(node);
-  
+void freeTree(struct Node *node){
+        if (node == NULL)return ;
+        freeTree(node->left);
+        freeTree(node->right);
+        free(node);
+        
 }
 int testAVLThree(){
-  struct Node*root=NULL;
-  root=insert(root, 50);
-  root=insert(root, 30);
-  root=insert(root, 20);
-  root=insert(root, 40);
-  root=insert(root, 70);
-  root=insert(root, 60);
-  root=insert(root, 80);
-  printf("In-order traversal of AVL tree: ");
-  inOrder(root);
-  printf("\n");
-  root=delete(root, 20);
-  printf("In-order traversal after deleting 20: ");
-  inOrder(root);
-  printf("\n");
-  root=invert(root);
-  printf("In-order traversal after inverting: ");
-  inOrder(root);
-  printf("\n");
-  freeTree(root);
-  return 0;
-  
+        struct Node *root = NULL;
+        root = insert(root, 50);
+        root = insert(root, 30);
+        root = insert(root, 20);
+        root = insert(root, 40);
+        root = insert(root, 70);
+        root = insert(root, 60);
+        root = insert(root, 80);
+        printf("In-order traversal of AVL tree: ");
+        inOrder(root);
+        printf("\n");
+        root = delete(root, 20);
+        printf("In-order traversal after deleting 20: ");
+        inOrder(root);
+        printf("\n");
+        root = invert(root);
+        printf("In-order traversal after inverting: ");
+        inOrder(root);
+        printf("\n");
+        freeTree(root);
+        return 0;
+        
 }
 int moreCode(){
-  int n, sum=0;
-  printf("Enter a positive integer n: ");
-  scanf("%d", &n);
-  for (int i=1;i<=n;i++){
-      sum+=i;
-      
-  }
-  printf("The sum of the first %d natural numbers is %d.\n", n, sum);
-  return 0;
-  
+        int n, sum = 0;
+        printf("Enter a positive integer n: ");
+        scanf("%d",  & n);
+        for (int i = 1;i <= n;i ++){
+                sum += i;
+                
+        }
+        printf("The sum of the first %d natural numbers is %d.\n", n, sum);
+        return 0;
+        
 }

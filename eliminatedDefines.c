@@ -1,35 +1,437 @@
 
 
-int main(){
-    printf("%d\n",P+Q);
+struct PriorityQueueNode {
+    int data;
+    int priority;
+    struct PriorityQueueNode* next;
+};
+
+struct PriorityQueue {
+    struct PriorityQueueNode* front;
+};
+
+struct PriorityQueueNode* createNode(int data, int priority) {
+    struct PriorityQueueNode* newNode = (struct PriorityQueueNode*)malloc(sizeof(struct PriorityQueueNode));
+    if (newNode == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->priority = priority;
+    newNode->next = NULL;
+    return newNode;
 }
 
-unsigned long long factorial(int n) {
-    if (n == 0 || n == 1) {
-        return 1;
+struct PriorityQueue* createPriorityQueue() {
+    struct PriorityQueue* pq = (struct PriorityQueue*)malloc(sizeof(struct PriorityQueue));
+    if (pq == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    pq->front = NULL;
+    return pq;
+}
+
+void push(struct PriorityQueue* pq, int data, int priority) {
+    struct PriorityQueueNode* newNode = createNode(data, priority);
+    if (pq->front == NULL || priority < pq->front->priority) {
+        newNode->next = pq->front;
+        pq->front = newNode;
     } else {
-        return n * factorial(n - 1);
+        struct PriorityQueueNode* current = pq->front;
+        while (current->next != NULL && current->next->priority <= priority) {
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next = newNode;
     }
 }
 
-int useFact() {
-    int number;
-
-    printf("Enter a non-negative integer: ");
-    scanf("%d", &number);
-
-    if (number < 0) {
-        printf("Factorial is not defined for negative numbers.\n");
-    } else {
-        unsigned long long result = factorial(number);
-        printf("Factorial of %d is %llu\n", number, result);
+void pop(struct PriorityQueue* pq) {
+    if (pq->front != NULL) {
+        struct PriorityQueueNode* temp = pq->front;
+        pq->front = pq->front->next;
+        free(temp);
     }
+}
+
+int top(struct PriorityQueue* pq) {
+    if (pq->front != NULL) {
+        return pq->front->data;
+    }
+    return -1; // Return -1 to indicate an empty queue.
+}
+
+int is_empty(struct PriorityQueue* pq) {
+    return pq->front == NULL;
+}
+
+void printPriorityQueue(struct PriorityQueue* pq) {
+    struct PriorityQueueNode* current = pq->front;
+    while (current != NULL) {
+        printf("(%d, %d) ", current->data, current->priority);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct PriorityQueue* pq = createPriorityQueue();
+
+    push(pq, 42, 2);
+    push(pq, 13, 1);
+    push(pq, 8, 3);
+    push(pq, 55, 2);
+
+    printf("Priority Queue: ");
+    printPriorityQueue(pq);
+
+    while (!is_empty(pq)) {
+        printf("Top element: %d\n", top(pq));
+        pop(pq);
+    }
+
+    return 0;
+}
+
+int testingComplex() {
+    // Declare variables with complex and imaginary parts.
+    _Complex double complexVar1 = 3.0 + 2.0 * _Complex_I;
+    _Complex double complexVar2 = 1.0 - 2.0 * _Complex_I;
+    
+    // Perform complex arithmetic.
+    _Complex double result = complexVar1 * complexVar2 + 2.0 * _Complex_I;
+    
+    // Declare a boolean variable.
+    _Bool isPositiveReal = 12;
+    
+    // Print the complex result and whether its real part is positive.
+    printf("Result: %lf + %lfi\n",result,result);
+    printf("Is the real part positive? %s\n", isPositiveReal ? "Yes" : "No");
+    
+    return 0;
+}
+
+struct HeapNode {
+    int data;
+};
+
+struct MinHeap {
+    struct HeapNode** array;
+    int capacity;
+    int size;
+};
+
+struct MinHeap* createMinHeap(int capacity) {
+    struct MinHeap* minHeap = (struct MinHeap*)malloc(sizeof(struct MinHeap));
+    if (minHeap == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    minHeap->capacity = capacity;
+    minHeap->size = 0;
+    minHeap->array = (struct HeapNode**)malloc(capacity * sizeof(struct HeapNode*));
+    if (minHeap->array == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    return minHeap;
+}
+
+void swap(struct HeapNode** a, struct HeapNode** b) {
+    struct HeapNode* temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void heapify(struct MinHeap* minHeap, int index) {
+    int smallest = index;
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
+
+    if (left < minHeap->size && minHeap->array[left]->data < minHeap->array[smallest]->data)
+        smallest = left;
+
+    if (right < minHeap->size && minHeap->array[right]->data < minHeap->array[smallest]->data)
+        smallest = right;
+
+    if (smallest != index) {
+        swap(&minHeap->array[index], &minHeap->array[smallest]);
+        heapify(minHeap, smallest);
+    }
+}
+
+int is_empty(struct MinHeap* minHeap) {
+    return minHeap->size == 0;
+}
+
+void push(struct MinHeap* minHeap, int data) {
+    if (minHeap->size >= minHeap->capacity) {
+        printf("Heap is full, can't insert.\n");
+        return;
+    }
+
+    struct HeapNode* newNode = (struct HeapNode*)malloc(sizeof(struct HeapNode));
+    if (newNode == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
+    newNode->data = data;
+    minHeap->size++;
+    int i = minHeap->size - 1;
+    minHeap->array[i] = newNode;
+
+    while (i > 0 && minHeap->array[i]->data < minHeap->array[(i - 1) / 2]->data) {
+        swap(&minHeap->array[i], &minHeap->array[(i - 1) / 2]);
+        i = (i - 1) / 2;
+    }
+}
+
+int pop(struct MinHeap* minHeap) {
+    if (is_empty(minHeap)) {
+        printf("Heap is empty, can't pop.\n");
+        return -1;
+    }
+
+    if (minHeap->size == 1) {
+        minHeap->size--;
+        return minHeap->array[0]->data;
+    }
+
+    int root = minHeap->array[0]->data;
+    minHeap->array[0] = minHeap->array[minHeap->size - 1];
+    minHeap->size--;
+    heapify(minHeap, 0);
+
+    return root;
+}
+
+int top(struct MinHeap* minHeap) {
+    if (is_empty(minHeap)) {
+        printf("Heap is empty, can't get top element.\n");
+        return -1;
+    }
+    return minHeap->array[0]->data;
+}
+
+int main() {
+    struct MinHeap* minHeap = createMinHeap(10);
+
+    push(minHeap, 4);
+    push(minHeap, 10);
+    push(minHeap, 8);
+    push(minHeap, 1);
+
+    printf("Top element: %d\n", top(minHeap));
+
+    pop(minHeap);
+    printf("Top element after pop: %d\n", top(minHeap));
+
+    pop(minHeap);
+    printf("Top element after another pop: %d\n", top(minHeap));
+
+    return 0;
+}
+
+_Static_assert(sizeof(int) == 4, "int must be 4 bytes on this platform");
+
+_Thread_local int threadLocalVariable;
+
+int testThread() {
+    // Initialize the thread-local variable.
+    threadLocalVariable = 42;
+
+    // Access the thread-local variable from the main thread.
+    printf("Thread-Local Variable in Main Thread: %d\n", threadLocalVariable);
+
+    // Create a new thread to access the thread-local variable.
+    // Assume a hypothetical thread creation mechanism.
+    // In a real program, you'd use a thread library (e.g., pthreads or C11 threads).
+    // For simplicity, we'll simulate creating a new thread using a function call.
+    createNewThread();
+
+    return 0;
+}
+
+void createNewThread() {
+    // Access the thread-local variable in the new thread.
+    printf("Thread-Local Variable in New Thread: %d\n", threadLocalVariable);
+
+    // Modify the thread-local variable in the new thread.
+    threadLocalVariable = 99;
+
+    // Access the modified thread-local variable.
+    printf("Modified Thread-Local Variable in New Thread: %d\n", threadLocalVariable);
+}
+
+struct DynamicMatrix {
+    int rows;
+    int cols;
+    int** data;
+};
+
+struct DynamicMatrix* createMatrix(int rows, int cols) {
+    struct DynamicMatrix* matrix = (struct DynamicMatrix*)malloc(sizeof(struct DynamicMatrix));
+    if (matrix == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    matrix->rows = rows;
+    matrix->cols = cols;
+
+    // Allocate memory for the data.
+    matrix->data = (int**)malloc(rows * sizeof(int*));
+    if (matrix->data == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < rows; i++) {
+        matrix->data[i] = (int*)malloc(cols * sizeof(int));
+        if (matrix->data[i] == NULL) {
+            printf("Memory allocation failed.\n");
+            exit(1);
+        }
+    }
+
+    return matrix;
+}
+
+void initializeMatrix(struct DynamicMatrix* matrix, int value) {
+    for (int i = 0; i < matrix->rows; i++) {
+        for (int j = 0; j < matrix->cols; j++) {
+            matrix->data[i][j] = value;
+        }
+    }
+}
+
+void setMatrixValue(struct DynamicMatrix* matrix, int row, int col, int value) {
+    if (row >= 0 && row < matrix->rows && col >= 0 && col < matrix->cols) {
+        matrix->data[row][col] = value;
+    } else {
+        printf("Invalid row or column index.\n");
+    }
+}
+
+int getMatrixValue(struct DynamicMatrix* matrix, int row, int col) {
+    if (row >= 0 && row < matrix->rows && col >= 0 && col < matrix->cols) {
+        return matrix->data[row][col];
+    } else {
+        printf("Invalid row or column index.\n");
+        return -1; // Return -1 to indicate an error.
+    }
+}
+
+void printMatrix(struct DynamicMatrix* matrix) {
+    for (int i = 0; i < matrix->rows; i++) {
+        for (int j = 0; j < matrix->cols; j++) {
+            printf("%d\t", matrix->data[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void freeMatrix(struct DynamicMatrix* matrix) {
+    for (int i = 0; i < matrix->rows; i++) {
+        free(matrix->data[i]);
+    }
+    free(matrix->data);
+    free(matrix);
+}
+
+int main() {
+    // Create a dynamic matrix with 3 rows and 4 columns.
+    struct DynamicMatrix* matrix = createMatrix(3, 4);
+
+    // Initialize the matrix with a value of 1.
+    initializeMatrix(matrix, 1);
+
+    // Set and print values in the matrix.
+    setMatrixValue(matrix, 0, 0, 5);
+    setMatrixValue(matrix, 1, 2, 8);
+
+    printf("Matrix Contents:\n");
+    printMatrix(matrix);
+
+    // Get and print a value from the matrix.
+    int value = getMatrixValue(matrix, 1, 2);
+    if (value != -1) {
+        printf("Value at (1, 2): %d\n", value);
+    }
+
+    // Free the memory used by the matrix.
+    freeMatrix(matrix);
+
+    return 0;
+}
+
+int variousTypes() {
+    // Integer types
+    int integerVar = 42;
+    long longVar = 1234567890L;
+    short shortVar = 32767;
+    unsigned int unsignedVar = 100;
+    
+    // Floating-point types
+    float floatVar = 3.14f;
+    double doubleVar = 2.71828;
+    long double longDoubleVar = 1.4142135623730951L;
+    
+    // Character type
+    char charVar = 'A';
+    
+    // Arrays
+    int intArray[5] = {1, 2, 3, 4, 5};
+    double doubleArray[] = {1.1, 2.2, 3.3, 4.4};
+    char string[] = "Hello, C!";
+    
+    // Printing values
+    printf("Integer: %d\n", integerVar);
+    printf("Long: %ld\n", longVar);
+    printf("Short: %hd\n", shortVar);
+    printf("Unsigned: %u\n", unsignedVar);
+    
+    printf("Float: %f\n", floatVar);
+    printf("Double: %lf\n", doubleVar);
+    printf("Long Double: %Lf\n", longDoubleVar);
+    
+    printf("Character: %c\n", charVar);
+    
+    printf("Int Array: %d, %d, %d, %d, %d\n", intArray[0], intArray[1], intArray[2], intArray[3], intArray[4]);
+    printf("Double Array: %.1f, %.1f, %.1f, %.1f\n", doubleArray[0], doubleArray[1], doubleArray[2], doubleArray[3]);
+    printf("String: %s\n", string);
+    
+    return 0;
+}
+
+
+_Atomic int atomicInt = ATOMIC_VAR_INIT(0);
+
+void* increment(void* arg) {
+    for (int i = 0; i < 10000; i++) {
+        atomic_fetch_add(&atomicInt, 1);
+    }
+    return NULL;
+}
+
+int testAtomic() {
+    float thread1, thread2;
+
+    pthread_create(&thread1, NULL, increment, NULL);
+    pthread_create(&thread2, NULL, increment, NULL);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    printf("Atomic Integer Value: %d\n", atomic_load(&atomicInt));
 
     return 0;
 }
 
 struct Node {
     int data;
+    struct Node* prev;
     struct Node* next;
 };
 
@@ -40,17 +442,16 @@ struct Node* createNode(int data) {
         exit(1);
     }
     newNode->data = data;
+    newNode->prev = NULL;
     newNode->next = NULL;
     return newNode;
 }
 
-struct Node* insertAtBeginning(struct Node* head, int data) {
-    struct Node* newNode = createNode(data);
-    newNode->next = head;
-    return newNode;
+struct Node* initializeDoublyLinkedList() {
+    return NULL;
 }
 
-struct Node* insertAtEnd(struct Node* head, int data) {
+struct Node* append(struct Node* head, int data) {
     struct Node* newNode = createNode(data);
     if (head == NULL) {
         return newNode;
@@ -60,10 +461,11 @@ struct Node* insertAtEnd(struct Node* head, int data) {
         current = current->next;
     }
     current->next = newNode;
+    newNode->prev = current;
     return head;
 }
 
-void printList(struct Node* head) {
+void printDoublyLinkedList(struct Node* head) {
     struct Node* current = head;
     while (current != NULL) {
         printf("%d -> ", current->data);
@@ -72,45 +474,25 @@ void printList(struct Node* head) {
     printf("NULL\n");
 }
 
-int search(struct Node* head, int target) {
+struct Node* shiftBitsLeft(struct Node* head, int positions) {
     struct Node* current = head;
     while (current != NULL) {
-        if (current->data == target) {
-            return 1; // Element found
-        }
+        current->data = current->data << positions;
         current = current->next;
     }
-    return 0; // Element not found
-}
-
-struct Node* deleteNode(struct Node* head, int target) {
-    if (head == NULL) {
-        return head; // List is empty, nothing to delete.
-    }
-
-    if (head->data == target) {
-        struct Node* temp = head;
-        head = head->next;
-        free(temp);
-        return head;
-    }
-
-    struct Node* current = head;
-    while (current->next != NULL && current->next->data != target) {
-        current = current->next;
-    }
-
-    if (current->next == NULL) {
-        return head; // Element not found in the list.
-    }
-
-    struct Node* temp = current->next;
-    current->next = current->next->next;
-    free(temp);
     return head;
 }
 
-void freeList(struct Node* head) {
+struct Node* shiftBitsRight(struct Node* head, int positions) {
+    struct Node* current = head;
+    while (current != NULL) {
+        current->data = current->data >> positions;
+        current = current->next;
+    }
+    return head;
+}
+
+void freeDoublyLinkedList(struct Node* head) {
     struct Node* current = head;
     while (current != NULL) {
         struct Node* temp = current;
@@ -120,374 +502,26 @@ void freeList(struct Node* head) {
 }
 
 int main() {
-    struct Node* head = NULL;
+    struct Node* myList = initializeDoublyLinkedList();
 
-    head = insertAtBeginning(head, 3);
-    head = insertAtBeginning(head, 2);
-    head = insertAtBeginning(head, 1);
+    myList = append(myList, 5);
+    myList = append(myList, 10);
+    myList = append(myList, 15);
+    myList = append(myList, 20);
 
     printf("Original List: ");
-    printList(head);
+    printDoublyLinkedList(myList);
 
-    if (search(head, 2)) {
-        printf("Element 2 found in the list.\n");
-    } else {
-        printf("Element 2 not found in the list.\n");
-    }
+    myList = shiftBitsLeft(myList, 2);
+    printf("After Shifting Bits Left: ");
+    printDoublyLinkedList(myList);
 
-    head = deleteNode(head, 2);
+    myList = shiftBitsRight(myList, 1);
+    printf("After Shifting Bits Right: ");
+    printDoublyLinkedList(myList);
 
-    printf("List after deleting 2: ");
-    printList(head);
-
-    freeList(head); // Free memory to avoid memory leaks.
-
-    return 0;
-}
-
-struct Node {
-    int data;
-    struct Node* left;
-    struct Node* right;
-};
-
-struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    if (newNode == NULL) {
-        printf("Memory allocation failed.\n");
-        exit(1);
-    }
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
-}
-
-struct Node* insert(struct Node* root, int data) {
-    if (root == NULL) {
-        return createNode(data);
-    }
-
-    if (data < root->data) {
-        root->left = insert(root->left, data);
-    } else if (data > root->data) {
-        root->right = insert(root->right, data);
-    }
-
-    return root;
-}
-
-void inOrderTraversal(struct Node* root) {
-    if (root != NULL) {
-        inOrderTraversal(root->left);
-        printf("%d ", root->data);
-        inOrderTraversal(root->right);
-    }
-}
-
-struct Node* search(struct Node* root, int key) {
-    if (root == NULL || root->data == key) {
-        return root;
-    }
-
-    if (key < root->data) {
-        return search(root->left, key);
-    } else {
-        return search(root->right, key);
-    }
-}
-
-int testTree() {
-    struct Node* root = NULL;
-
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
-
-    printf("In-Order Traversal: ");
-    inOrderTraversal(root);
-    printf("\n");
-
-    int key = 40;
-    struct Node* result = search(root, key);
-    if (result != NULL) {
-        printf("Element %d found in the tree.\n", key);
-    } else {
-        printf("Element %d not found in the tree.\n", key);
-    }
-
-    return 0;
-}
-
-
-int globalVar = 42; // A global variable
-
-int varDecl() {
-    // Variable Declarations
-    int localVar = 10; // A local variable
-    char charVar = 'A'; // A character variable
-    double doubleVar = 3.14159; // A double-precision floating-point variable
-
-    // Function Declaration
-    void greet(); // Function declaration
-
-    // Function Pointer Declaration
-    void (*functionPtr)(); // Declaration of a pointer to a function that takes no arguments and returns void
-
-    // Struct Declaration
-    struct Person {
-        char name[50];
-        int age;
-    };
-
-    // Struct Variable Declaration
-    struct Person person1; // Declaration of a variable of type struct Person
-
-    // Typedef Declaration
-    typedef unsigned int uint; // Typedef declaration for an unsigned integer
-
-    // Using the typedef to declare a variable
-    int positiveInt = 100; // Using the typedef for an unsigned integer
-
-    // Output
-    printf("Global Variable: %d\n", globalVar);
-    printf("Local Variable: %d\n", localVar);
-    printf("Character Variable: %c\n", charVar);
-    printf("Double Variable: %lf\n", doubleVar);
-
-    person1.age = 25;
-    strcpy(person1.name, "John Doe");
-    printf("Person: %s, Age: %d\n", person1.name, person1.age);
-
-    // Calling a Function
-    greet();
-
-    return 0;
-}
-
-void greet() {
-    printf("Hello, World!\n");
-}
-
-int align() {
-    _Alignas(16) char alignedCharArray[32]; // Declare an array with a 16-byte alignment requirement.
-    
-    printf("Alignment of alignedCharArray: %zu\n", _Alignof(int)); // Check the alignment of the array.
-    
-    return 0;
-}
-
-int useCOnst() {
-    const int constantValue = 42; // Declare a constant variable.
-    
-    // constantValue = 10; // This line would result in a compilation error because you can't modify a constant variable.
-    
-    printf("The constant value is: %d\n", constantValue);
-    
-    return 0;
-}
-
-int add(int a, int b) {
-    return a + b; // Return the sum of two integers.
-}
-
-int testadd() {
-    int result = add(5, 3); // Call the add function and store the result.
-    
-    printf("5 + 3 = %d\n", result);
-    
-    return 0;
-}
-
-int testForBreak() {
-    for (int i = 1; i <= 5; i++) {
-        if (i == 3) {
-            break; // Exit the loop when i is 3.
-        }
-        printf("i = %d\n", i);
-    }
-    
-    return 0;
-}
-
-int switchTest() {
-    int day = 2;
-    
-    switch (day) {
-        case 1:
-            printf("Monday\n");
-            break;
-        case 2:
-            printf("Tuesday\n");
-            break;
-        case 3:
-            printf("Wednesday\n");
-            break;
-        default:
-            printf("Other day\n");
-    }
-    
-    return 0;
-}
-
-int testTernary() {
-    int number = 7;
-    
-    // Using a ternary if to determine if the number is even or odd.
-    const char* result = (number % 2 == 0) ? "even" : "odd";
-    
-    printf("The number %d is %s.\n", number, result);
-    
-    return 0;
-}
-
-struct Point {
-    int x;
-    int y;
-};
-
-union DataPoint {
-    struct Point point;
-    int coordinates[2];
-};
-
-int counter() {
-    static int count = 0;
-    count++;
-    return count;
-}
-
-int testStructs() {
-    // 'static' variable retains its value across function calls.
-    printf("Counter: %d\n", counter()); // Counter: 1
-    printf("Counter: %d\n", counter()); // Counter: 2
-
-    // Create a struct and initialize it.
-    struct Point p1;
-    p1.x = 5;
-    p1.y = 10;
-
-    // Create a union to represent the same point.
-    union DataPoint dp1;
-    dp1.point = p1;
-
-    // Access the point coordinates using the union.
-    printf("Coordinates from Union: x=%d, y=%d\n", dp1.coordinates[0], dp1.coordinates[1]);
-
-    // Use a while loop to print numbers from 1 to 5.
-    int i = 1;
-    while (i <= 5) {
-        printf("%d ", i);
-        i++;
-    }
-    printf("\n");
-
-    return 0;
-}
-
-int test2() {
-    int* a = malloc(sizeof(int) * 10000);
-    if (a == NULL) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
-
-    srand(time(NULL));
-
-    for (int i = 0; i  10000; i++) {
-        a[i] = rand() % 100;
-    }
-
-    double sum = 0;
-    for (int i = 0; i  10000; i++) {
-        sum += a[i];
-    }
-
-    double mean = sum / 10000;
-
-    double variance = 0;
-    for (int i = 0; i < 10000; i++) {
-        variance += pow(a[i] - mean, 2);
-    }
-
-    double standardDeviation = sqrt(variance);
-
-    printf("The standard deviation of 10000 random integers is: %lf\n", standardDeviation);
-
-    free(a);
-
-    return 0;
-}
-
-int test3() {
-    int *arr;
-    int *reversed_arr;
-    int n 10;
-    int i, j;
-
-    arr = (int *)malloc(n * sizeof(int));
-    reversed_arr = (int *)malloc(n * sizeof(int));
-
-    if (arr == NULL || reversed_arr == NULL) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
-
-    printf("Enter %d numbers:\n", n);
-
-    for (i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
-    }
-
-    for (i = 0, j = n - 1; i < n; i++, j--) {
-        reversed_arr[i] = arr[j];
-    }
-
-    printf("Original array: ");
-    for (i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-
-    printf("\nReversed array: ");
-    for (i = 0; i < n; i++) {
-        printf("%d ", reversed_arr[i]);
-    }
-
-    printf("\n");
-
-    free(arr);
-    free(reversed_arr);
-
-    return 0;
-}
-
-int test4() {
-    char *sentence1 = (char *)malloc(100 * sizeof(char));
-    char *sentence2 = (char *)malloc(100 * sizeof(char));
-
-    if (sentence1 ==  || sentence2 == NULL) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
-
-    printf("Enter a sentence: ");
-    fgets(sentence1, 100, stdin);
-
-    // Copy sentence1 into sentence2 character by character
-    int len = strlen(sentence1);
-    for (int i = 0; i < len; i++) {
-        sentence2[i] = sentence1[i];
-    }
-    
-    printf("Original Sentence: %s", sentence1);
-    printf("Copied Sentence: %s", sentence2);
-
-    free(sentence1);
-    free(sentence2)
+    // Free the memory used by the list.
+    freeDoublyLinkedList(myList);
 
     return 0;
 }
